@@ -87,20 +87,22 @@ class App extends React.Component<AppProps, AppState> {
                         let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
 
                         if (categoriesContainer) {
-                            const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
+                            // const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
+                            //
+                            // const catsArray: any[] = CompanyCategory.categoriesToJson(filteredCategories);
+                            // localStorage.setItem('rawData', JSON.stringify(catsArray));
+                            //
+                            // const catsArrayCalculated: any[] = CompanyCategory.categoriesCalculatedToJson(filteredCategories);
+                            // localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
+                            //
+                            // const catsArrayMedian: any[] = CompanyCategory.categoriesMedianToJson(filteredCategories);
+                            // localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
+                            //
+                            // this.setRawJson(catsArray);
+                            // this.setCalculatedJson(catsArrayCalculated);
+                            // this.setMedianJson(catsArrayMedian);
 
-                            const catsArray: any[] = CompanyCategory.categoriesToJson(filteredCategories);
-                            localStorage.setItem('rawData', JSON.stringify(catsArray));
-
-                            const catsArrayCalculated: any[] = CompanyCategory.categoriesCalculatedToJson(filteredCategories);
-                            localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
-
-                            const catsArrayMedian: any[] = CompanyCategory.categoriesMedianToJson(filteredCategories);
-                            localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
-
-                            this.setRawJson(catsArray);
-                            this.setCalculatedJson(catsArrayCalculated);
-                            this.setMedianJson(catsArrayMedian);
+                            const filteredCategoriesByYear: CompanyCategory[] = CompanyCategory.filterCategoriesByYear(categoriesContainer.categories);
                         }
                     }}>
                     Generate tables

@@ -1,4 +1,5 @@
 import { bool, number } from "prop-types";
+import { unmountComponentAtNode } from "react-dom";
 
 export enum Indicator {
     NameOfCompany,
@@ -71,6 +72,12 @@ export class CompanyData {
     public SGAI: number = 0;
     public Accruals: number = 0;
     public LEVI: number = 0;
+
+    public revenueChange: number = 0;
+
+    public static calculateRevenueChange(company: CompanyData) {
+        company.revenueChange = (company.nextYearData.revenues - company.currentYearData.revenues) / company.currentYearData.revenues;
+    }
 
     public calculateVars(): boolean {
         let calculated: boolean = true;
@@ -483,6 +490,7 @@ export class CompanyCategory {
     public subCategories: CompanySubCategory[] = [];
     public companies: CompanyData[] = [];
     public filteredCompanies: CompanyData[] = [];
+    public companiesByYear: { [key: number]: CompanyData[] } = {};
 
     constructor(category: Category, subCategories: CompanySubCategory[], companies: CompanyData[]) {
         this.category = category;
@@ -560,6 +568,30 @@ export class CompanyCategory {
         console.log(filteredCategories);
 
         return filteredCategories;
+    }
+
+    public static filterCategoriesByYear(categories: CompanyCategory[]): CompanyCategory[] {
+        categories.forEach((category: CompanyCategory) => {
+            const companiesByYear: { [key: number]: CompanyData[] } = {};
+
+            category.companies.forEach((company: CompanyData) => {
+                CompanyData.calculateRevenueChange(company);
+
+                const year: number = company.currentYearData.year;
+
+                if (!companiesByYear[year]) {
+                    companiesByYear[year] = [];
+                }
+
+                companiesByYear[year].push(company);
+            });
+
+            category.companiesByYear = companiesByYear;
+
+            console.log(category.companiesByYear);
+        });
+
+        return null
     }
 
     public static categoriesToJson(categories: CompanyCategory[]): any[] {
