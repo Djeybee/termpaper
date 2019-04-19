@@ -864,7 +864,7 @@ export class CompanyCategory {
             }
         });
 
-        const firstRow: string[] = ['Year'];
+        const firstRow: string[] = ['Industry/Year'];
 
         const years: number[] = [];
 

@@ -5,6 +5,7 @@ import { DataManager } from "./DataManager";
 import { CompanyCategory } from "./Models";
 import { Table } from "./Table";
 import * as XLSX from 'xlsx';
+import { networkInterfaces } from "os";
 
 var FileSaver = require('file-saver');
 
@@ -18,6 +19,7 @@ interface AppState {
     sheetRaw: any;
     sheetCalculated: any;
     sheetMedian: any;
+    sheetMedianRevenue: any;
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -25,7 +27,8 @@ class App extends React.Component<AppProps, AppState> {
         categories: [],
         sheetRaw: null,
         sheetCalculated: null,
-        sheetMedian: null
+        sheetMedian: null,
+        sheetMedianRevenue: null
     };
 
     public componentDidMount() {
@@ -42,6 +45,11 @@ class App extends React.Component<AppProps, AppState> {
         var savedMedianJson = JSON.parse(localStorage.getItem('medianData'));
         if (savedMedianJson) {
             this.setMedianJson(savedMedianJson);
+        }
+
+        var savedMedianRevenueJson = JSON.parse(localStorage.getItem('medianRevenueData'));
+        if (savedMedianRevenueJson) {
+            this.setMedianRevenueJson(savedMedianRevenueJson);
         }
     }
 
@@ -61,6 +69,10 @@ class App extends React.Component<AppProps, AppState> {
             htmlMedial = XLSX.utils.sheet_to_html(this.state.sheetMedian);
         }
 
+        let htmlMedianRevenue: any = null;
+        if (this.state.sheetMedianRevenue) {
+            htmlMedianRevenue = XLSX.utils.sheet_to_html(this.state.sheetMedianRevenue);
+        }
 
         return (
             <div className="App">
@@ -87,27 +99,29 @@ class App extends React.Component<AppProps, AppState> {
                         let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
 
                         if (categoriesContainer) {
-                            // const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
-                            //
-                            // const catsArray: any[] = CompanyCategory.categoriesToJson(filteredCategories);
-                            // localStorage.setItem('rawData', JSON.stringify(catsArray));
-                            //
-                            // const catsArrayCalculated: any[] = CompanyCategory.categoriesCalculatedToJson(filteredCategories);
-                            // localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
-                            //
-                            // const catsArrayMedian: any[] = CompanyCategory.categoriesMedianToJson(filteredCategories);
-                            // localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
-                            //
-                            // this.setRawJson(catsArray);
-                            // this.setCalculatedJson(catsArrayCalculated);
-                            // this.setMedianJson(catsArrayMedian);
+                            const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
+
+                            const catsArray: any[] = CompanyCategory.categoriesToJson(filteredCategories);
+                            localStorage.setItem('rawData', JSON.stringify(catsArray));
+
+                            const catsArrayCalculated: any[] = CompanyCategory.categoriesCalculatedToJson(filteredCategories);
+                            localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
+
+                            const catsArrayMedian: any[] = CompanyCategory.categoriesMedianToJson(filteredCategories);
+                            localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
+
 
                             const filteredCategoriesByYear: CompanyCategory[] = CompanyCategory.filterCategoriesByYear(categoriesContainer.categories);
 
-                            const catsArrayMedian: any[] = CompanyCategory.categoriesMedianRevenueToJson(filteredCategoriesByYear);
-                            console.log(catsArrayMedian);
+                            const catsArrayMedianRevenue: any[] = CompanyCategory.categoriesMedianRevenueToJson(filteredCategoriesByYear);
+                            localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedianRevenue));
 
-                            // localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedian));
+                            this.setRawJson(catsArray);
+                            this.setCalculatedJson(catsArrayCalculated);
+                            this.setMedianJson(catsArrayMedian);
+                            this.setMedianRevenueJson(catsArrayMedianRevenue);
+
+
                         }
                     }}>
                     Generate tables
@@ -150,10 +164,23 @@ class App extends React.Component<AppProps, AppState> {
                         }}>
                         Download median table
                     </button>
+                    <button
+                        onClick={() => {
+                            if (this.state.sheetMedianRevenue) {
+                                const wb = XLSX.utils.book_new();
+
+                                XLSX.utils.book_append_sheet(wb, this.state.sheetMedianRevenue, "median revenue");
+
+                                XLSX.writeFile(wb, 'median_revenue.xlsb');
+                            }
+                        }}>
+                        Download median revenue table
+                    </button>
                 </div>
                 <div dangerouslySetInnerHTML={{__html: htmlRaw}}/>
                 <div dangerouslySetInnerHTML={{__html: htmlCalculated}}/>
                 <div dangerouslySetInnerHTML={{__html: htmlMedial}}/>
+                <div dangerouslySetInnerHTML={{__html: htmlMedianRevenue}}/>
             </div>
         );
     }
@@ -205,6 +232,17 @@ class App extends React.Component<AppProps, AppState> {
 
         this.setState({
             sheetMedian: sheet,
+        });
+    }
+
+    private setMedianRevenueJson(jsonData: any) {
+        const sheet = XLSX.utils.json_to_sheet(
+            jsonData,
+            {skipHeader: true}
+        );
+
+        this.setState({
+            sheetMedianRevenue: sheet,
         });
     }
 }
