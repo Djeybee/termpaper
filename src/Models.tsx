@@ -588,6 +588,22 @@ export class CompanyCategory {
 
             category.companiesByYear = companiesByYear;
 
+            Object.keys(category.companiesByYear).forEach((value: any) => {
+                // console.log('key = ', value);
+
+                let array: CompanyData[] = category.companiesByYear[value];
+
+                array = array.sort((a: CompanyData, b: CompanyData) => {
+                    if (a.revenueChange > b.revenueChange) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                });
+
+                category.companiesByYear[value] = array;
+            });
+
             console.log(category.companiesByYear);
         });
 
