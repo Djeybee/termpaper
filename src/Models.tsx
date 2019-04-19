@@ -491,6 +491,7 @@ export class CompanyCategory {
     public companies: CompanyData[] = [];
     public filteredCompanies: CompanyData[] = [];
     public companiesByYear: { [key: number]: CompanyData[] } = {};
+    public companiesByYear75: { [key: number]: CompanyData } = {};
 
     constructor(category: Category, subCategories: CompanySubCategory[], companies: CompanyData[]) {
         this.category = category;
@@ -591,20 +592,36 @@ export class CompanyCategory {
             Object.keys(category.companiesByYear).forEach((value: any) => {
                 // console.log('key = ', value);
 
+                const newCompaniesByYear: { [key: number]: CompanyData[] } = {};
+                const newCompaniesByYear75: { [key: number]: CompanyData } = {};
+
+
                 let array: CompanyData[] = category.companiesByYear[value];
 
-                array = array.sort((a: CompanyData, b: CompanyData) => {
-                    if (a.revenueChange > b.revenueChange) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                });
+                if (array.length > 1) {
+                    array = array.sort((a: CompanyData, b: CompanyData) => {
+                        if (a.revenueChange > b.revenueChange) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    });
 
-                category.companiesByYear[value] = array;
+                    newCompaniesByYear[value] = array;
+
+                    const position: number = Math.round(array.length / 100 * 75);
+
+                    newCompaniesByYear75[value] = array[position - 1];
+                }
+
+                category.companiesByYear = newCompaniesByYear;
+                category.companiesByYear75 = newCompaniesByYear75;
+
+                console.log(category.companiesByYear);
+                console.log(category.companiesByYear75);
             });
 
-            console.log(category.companiesByYear);
+
         });
 
         return null
