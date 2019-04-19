@@ -103,6 +103,11 @@ class App extends React.Component<AppProps, AppState> {
                             // this.setMedianJson(catsArrayMedian);
 
                             const filteredCategoriesByYear: CompanyCategory[] = CompanyCategory.filterCategoriesByYear(categoriesContainer.categories);
+
+                            const catsArrayMedian: any[] = CompanyCategory.categoriesMedianRevenueToJson(filteredCategoriesByYear);
+                            console.log(catsArrayMedian);
+
+                            // localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedian));
                         }
                     }}>
                     Generate tables
