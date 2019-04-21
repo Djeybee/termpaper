@@ -52,7 +52,6 @@ export class FetchManager {
             search.push({
                 "indicatorId": "4-11"
             });
-            //
             search.push({
                 "indicatorId": "0-73",
                 "condition": {"operator": "eq", "value": subCategory}

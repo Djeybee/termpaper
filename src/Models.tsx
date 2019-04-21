@@ -590,7 +590,6 @@ export class CompanyCategory {
     public category: Category = 0;
     public categoryName: string = '';
     public subCategories: CompanySubCategory[] = [];
-    public dataRaw: any[] = [];
     public companies: CompanyData[] = [];
     public filteredCompanies: CompanyData[] = [];
     public companiesByYear: { [key: number]: CompanyData[] } = null;
