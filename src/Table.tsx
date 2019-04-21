@@ -13,7 +13,7 @@ export class Table extends React.Component<TableProps> {
             this.props.categories.forEach((category: CompanyCategory, index: number) => {
                 categoriesRows.push(
                     <CategoryRow key={index} category={category}>
-                        {category.subCategories.length}
+                        {/*{category.subCategories.length}*/}
                     </CategoryRow>
                 );
             });

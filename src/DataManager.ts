@@ -13,7 +13,7 @@ export class DataManager {
 
     public static currentCategory: CategoryRequestData = null;
 
-    public static companies: CompanyData[] = [];
+    public static rawData: any[] = [];
 
     public static year: number;
 
@@ -45,7 +45,7 @@ export class DataManager {
             })
             .catch(() => {
                 console.log('loadRequestDataFailed');
-                this.loadedCategories.push(new CompanyCategory(categoryRequestData.category, [], []));
+                this.loadedCategories.push(new CompanyCategory(categoryRequestData.category));
 
                 this.checkLoaded();
             });
@@ -80,10 +80,14 @@ export class DataManager {
 
             this.year = year;
 
+            this.rawData = [];
+
             this.category = categoryType;
 
             this.subCategoriesLoaded = () => {
-                const category: CompanyCategory = new CompanyCategory(categoryType, this.loadedSubCategories, this.companies);
+                const category: CompanyCategory = new CompanyCategory(categoryType);
+
+                category.rawData = this.rawData;
 
                 category.year = year;
 
@@ -101,11 +105,11 @@ export class DataManager {
 
         this.loadDataBySubCategory(this.year, subCategoryCode).then((result: any[]) => {
 
-            const subCategory: CompanySubCategory = new CompanySubCategory(subCategoryCode, result);
+            const subCategory: CompanySubCategory = new CompanySubCategory(subCategoryCode);
 
             this.loadedSubCategories.push(subCategory);
 
-            // this.companies = this.companies.concat(result);
+            this.rawData = this.rawData.concat(result);
 
             if (subCategorieCodes.length == this.loadedSubCategories.length) {
                 if (this.subCategoriesLoaded) {
@@ -178,7 +182,7 @@ export class RequestData {
 
 
 const companiesData: CategoryRequestData[] = [
-    // new CategoryRequestData(2018, Category.Industrials, 0),
+    new CategoryRequestData(2018, Category.Industrials, 0),
     // new CategoryRequestData(2017, Category.Industrials, 0),
     // new CategoryRequestData(2016, Category.Industrials, 0),
     // new CategoryRequestData(2015, Category.Industrials, 0),
@@ -192,7 +196,7 @@ const companiesData: CategoryRequestData[] = [
     //
     // new CategoryRequestData(2018, Category.Technology, 0),
     // new CategoryRequestData(2017, Category.Technology, 0),
-    new CategoryRequestData(2016, Category.Technology, 0),
+    // new CategoryRequestData(2016, Category.Technology, 0),
     // new CategoryRequestData(2015, Category.Technology, 0),
     // new CategoryRequestData(2014, Category.Technology, 0),
     // new CategoryRequestData(2013, Category.Technology, 0),

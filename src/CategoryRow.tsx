@@ -10,13 +10,13 @@ export class CategoryRow extends React.Component<CategoryRowProps> {
     render() {
         const subCategoriesRows: any[] = [];
         if (this.props.category) {
-            this.props.category.subCategories.forEach((subCategory: CompanySubCategory, index: number) => {
-                subCategoriesRows.push(
-                    <SubcategoryRow key={index} subCategory={subCategory}>
-
-                    </SubcategoryRow>
-                );
-            });
+            // this.props.category.subCategories.forEach((subCategory: CompanySubCategory, index: number) => {
+            //     subCategoriesRows.push(
+            //         <SubcategoryRow key={index} subCategory={subCategory}>
+            //
+            //         </SubcategoryRow>
+            //     );
+            // });
         }
 
         return (

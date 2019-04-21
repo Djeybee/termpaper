@@ -589,17 +589,15 @@ export class CompanyCategory {
     public maxCompanies: number = 0;
     public category: Category = 0;
     public categoryName: string = '';
-    public subCategories: CompanySubCategory[] = [];
     public companies: CompanyData[] = [];
+    public rawData: any[] = [];
     public filteredCompanies: CompanyData[] = [];
     public companiesByYear: { [key: number]: CompanyData[] } = null;
     public companiesByYear75: { [key: number]: CompanyData } = null;
 
-    constructor(category: Category, subCategories: CompanySubCategory[], companies: CompanyData[]) {
+    constructor(category: Category) {
         this.category = category;
         this.categoryName = CategoryNames[category];
-        this.subCategories = subCategories;
-        this.companies = companies;
     }
 
     public static filterCategories(categories: CompanyCategory[]): CompanyCategory[] {
@@ -1062,8 +1060,7 @@ export class CompanySubCategory {
     public companies: CompanyData[];
     public dataRaw: any[];
 
-    constructor(subCategoryId: number, dataRaw: any[]) {
+    constructor(subCategoryId: number) {
         this.subCategoryId = subCategoryId;
-        this.dataRaw = dataRaw;
     }
 }
