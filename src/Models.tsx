@@ -20,6 +20,13 @@ export enum Indicator {
     MarketCapitalization,
     CurrentRatio,
     ReturnOnAssets,
+    EBIT,
+    CashAndCashEquivalents,
+    CurrentDebt,
+    TotalLiabilities,
+    PreferredEquity,
+    NetIncome,
+    DividendsPaid
 }
 
 const yearsWithWeight: number[] = [
@@ -54,6 +61,15 @@ export const IndicatorCode: {} = {
     '4-11': Indicator.MarketCapitalization,
     '4-3': Indicator.CurrentRatio,
     '4-9': Indicator.ReturnOnAssets,
+    ////-------
+    '1-19': Indicator.EBIT,
+    '2-1': Indicator.CashAndCashEquivalents,
+    '2-47': Indicator.CurrentDebt,
+    '2-73': Indicator.TotalLiabilities,
+    '2-74': Indicator.PreferredEquity,
+    '1-58': Indicator.NetIncome,
+    '3-32': Indicator.DividendsPaid
+
 };
 
 export class CompanyData {
@@ -232,11 +248,11 @@ export class CompanyData {
             }
 
             switch (enumKey) {
-                case Indicator.NameOfCompany: {
-                    companyData.name = value;
-
-                    break;
-                }
+                // case Indicator.NameOfCompany: {
+                //     companyData.name = value;
+                //
+                //     break;
+                // }
 
                 case Indicator.Revenues: {
                     currentContainer.revenues = value;

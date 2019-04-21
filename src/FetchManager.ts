@@ -33,23 +33,20 @@ export class FetchManager {
                 "3-13", //Operating Cash Flow
                 "4-0", //Gross margin
                 "4-9", //Return on assets
+                "1-19", //EBIT
             ];
 
 
             let search: any[] = [];
 
-            search.push({
-                "indicatorId": "0-1"
-            });
-
-            search.push({
-                "indicatorId": "0-6"
-            });
-
+            // search.push({
+            //     "indicatorId": "0-1"
+            // });
+            //
             search.push({
                 "indicatorId": "4-11"
             });
-
+            //
             search.push({
                 "indicatorId": "0-73",
                 "condition": {"operator": "eq", "value": subCategory}
@@ -66,7 +63,7 @@ export class FetchManager {
                     "meta": this.getPeriodQuarter(year + 1)
                 });
             });
-
+            //
             yearsIndicators.forEach((indicatorId: string) => {
                 search.push({
                     "indicatorId": indicatorId,
@@ -79,6 +76,8 @@ export class FetchManager {
                 });
             });
 
+            // console.log('search = ', search);
+
             axios.post(
                 'https://simfin.com/api/v1/finder?api-key=uwAPKLPaWmwjxnYA8nwmsC7tm6zQsswO',
                 JSON.stringify({
@@ -86,9 +85,10 @@ export class FetchManager {
                     "search": search
                 })
             ).then((response: any) => {
-                resolve(response.data);
+                console.log('response = ', response);
+                // resolve(response.data);
             }).catch(() => {
-                reject();
+                // reject();
             });
         });
     }
