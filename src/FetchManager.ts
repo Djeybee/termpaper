@@ -78,8 +78,6 @@ export class FetchManager {
                 });
             });
 
-            // console.log('search = ', search);
-
             axios.post(
                 'https://simfin.com/api/v1/finder?api-key=uwAPKLPaWmwjxnYA8nwmsC7tm6zQsswO',
                 JSON.stringify({
