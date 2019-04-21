@@ -16,37 +16,37 @@ export class FetchManager {
     public static testFetchNew(year: number, subCategory: number): Promise<any> {
         return new Promise((resolve, reject) => {
             const quarterIndicators: string[] = [
-                "2-5", //Income from Continuing Operations
-                "2-21", //Total Current Assets
-                "2-22", //Property, Plant and Equipment, net
-                "2-41", //Total Assets
-                "2-57", //Total Current Liabilities
-                "4-6", //Total Debt
-                "4-5", //Debt to asset ratio = leverage
-                "4-3", //Current ratio
-            ];
+                // "2-5", //Income from Continuing Operations
+                // "2-21", //Total Current Assets
+                // "2-22", //Property, Plant and Equipment, net
+                // "2-41", //Total Assets
+                // "2-57", //Total Current Liabilities
+                // "4-6", //Total Debt
+                // "4-5", //Debt to asset ratio = leverage
+                // "4-3", //Current ratio
 
-            const yearsIndicators: string [] = [
-                "1-1", //Revenues
-                "1-12", //Selling, General and Administrative
-                "1-49", //Income from Continuing Operations
-                "3-2", //Depreciation & Amortisation
-                "3-13", //Operating Cash Flow
-                "4-0", //Gross margin
-                "4-9", //Return on assets
-                '1-58',//NetIncome
-                '3-32'//DividendsPaid
-            ];
-
-            const ttmIndicators: string [] = [
-                '1-19',// Indicator.EBIT,
                 '2-1',//Indicator.CashAndCashEquivalents,
                 '2-47',//: Indicator.CurrentDebt,
                 '2-73',//: Indicator.TotalLiabilities,
+            ];
+
+            const yearsIndicators: string [] = [
+                // "1-1", //Revenues
+                // "1-12", //Selling, General and Administrative
+                // "1-49", //Income from Continuing Operations
+                // "3-2", //Depreciation & Amortisation
+                // "3-13", //Operating Cash Flow
+                // "4-0", //Gross margin
+                // "4-9", //Return on assets
+
+                '1-58',//NetIncome
+                '3-32',//DividendsPaid
+                '1-19',// Indicator.EBIT,
                 '2-74'//: Indicator.PreferredEquity,
             ];
 
-
+            const ttmIndicators: string [] = [];
+            
             let search: any[] = [];
 
             search.push({
@@ -69,7 +69,7 @@ export class FetchManager {
                     "meta": this.getPeriodQuarter(year + 1)
                 });
             });
-            //
+            // //
             yearsIndicators.forEach((indicatorId: string) => {
                 search.push({
                     "indicatorId": indicatorId,
@@ -145,7 +145,7 @@ export class FetchManager {
         return [
             {
                 "id": 6,
-                "value": "ttm-1",
+                "value": "ttm",
                 "operator": "eq"
             },
             {
