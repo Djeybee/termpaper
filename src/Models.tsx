@@ -571,7 +571,7 @@ type BarMap = { [key in Category]: number }
 export const SubCategories: FooMap = {
     [Category.Industrials]: [100001, 100002, 100003, 100004],
     // [Category.Industrials]: [100001, 100002, 100003, 100004, 100005, 100006, 100007, 100008, 100009, 100010, 100011, 100012, 100013],
-    [Category.Technology]: [101001, 101002, 101003, 101004, 101005],
+    [Category.Technology]: [101001, 101002, 101003],
     [Category.ConsumerDefensive]: [102001, 102002, 102003, 102004, 102005, 102006],
     [Category.ConsumerCyclical]: [103001, 103002, 103003, 103004, 103005, 103011, 103013, 103015, 103018, 103020, 103026],
     [Category.Utilities]: [105001, 105002],
@@ -590,6 +590,7 @@ export class CompanyCategory {
     public category: Category = 0;
     public categoryName: string = '';
     public subCategories: CompanySubCategory[] = [];
+    public dataRaw: any[] = [];
     public companies: CompanyData[] = [];
     public filteredCompanies: CompanyData[] = [];
     public companiesByYear: { [key: number]: CompanyData[] } = null;
@@ -1060,9 +1061,10 @@ export class CompanySubCategory {
     public year: number = 0;
     public subCategoryId: number = 0;
     public companies: CompanyData[];
+    public dataRaw: any[];
 
-    constructor(subCategoryId: number, companies: CompanyData[]) {
+    constructor(subCategoryId: number, dataRaw: any[]) {
         this.subCategoryId = subCategoryId;
-        this.companies = companies;
+        this.dataRaw = dataRaw;
     }
 }

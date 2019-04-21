@@ -78,8 +78,6 @@ export class DataManager {
 
             this.loadedSubCategories = [];
 
-            this.companies = [];
-
             this.year = year;
 
             this.category = categoryType;
@@ -93,25 +91,6 @@ export class DataManager {
             };
 
             this.loadNextSubcateogory();
-
-            // subCategorieCodes.forEach((subCategoryCode: number) => {
-            //     this.loadDataBySubCategory(year, subCategoryCode).then((result: CompanyData[]) => {
-            //
-            //         const subCategory: CompanySubCategory = new CompanySubCategory(subCategoryCode, result);
-            //
-            //         subCategories.push(subCategory);
-            //
-            //         companies = companies.concat(result);
-            //
-            //         if (subCategories.length == subCategorieCodes.length) {
-            //             const category: CompanyCategory = new CompanyCategory(categoryType, subCategories, companies);
-            //
-            //             resolve(category);
-            //         }
-            //     }).catch(() => {
-            //         reject();
-            //     });
-            // });
         });
     }
 
@@ -120,15 +99,13 @@ export class DataManager {
 
         const subCategoryCode: number = subCategorieCodes[this.loadedSubCategories.length];
 
-        this.loadDataBySubCategory(this.year, subCategoryCode).then((result: CompanyData[]) => {
+        this.loadDataBySubCategory(this.year, subCategoryCode).then((result: any[]) => {
 
             const subCategory: CompanySubCategory = new CompanySubCategory(subCategoryCode, result);
-            
-            subCategory.year = this.year;
 
             this.loadedSubCategories.push(subCategory);
 
-            this.companies = this.companies.concat(result);
+            // this.companies = this.companies.concat(result);
 
             if (subCategorieCodes.length == this.loadedSubCategories.length) {
                 if (this.subCategoriesLoaded) {
@@ -146,7 +123,7 @@ export class DataManager {
         return new Promise((resolve, reject) => {
             const requestData: RequestData = new RequestData(year, subCategory);
 
-            this.loadData(requestData).then((result: CompanyData[]) => {
+            this.loadData(requestData).then((result: []) => {
                 resolve(result);
             }).catch(() => {
                 reject();
@@ -159,17 +136,17 @@ export class DataManager {
             FetchManager.testFetchNew(requestData.year, requestData.subCategory).then((result: any) => {
                 const resultRaw: [] = result['results'];
 
-                const resultParsed: CompanyData[] = [];
+                // const resultParsed: CompanyData[] = [];
 
-                resultRaw.forEach((companyDataRaw: {}) => {
-                    const companyData: CompanyData = CompanyData.createWithJson(companyDataRaw, requestData.year, true);
+                // resultRaw.forEach((companyDataRaw: {}) => {
+                //     const companyData: CompanyData = CompanyData.createWithJson(companyDataRaw, requestData.year, true);
+                //
+                //     if (companyData) {
+                //         resultParsed.push(companyData);
+                //     }
+                // });
 
-                    if (companyData) {
-                        resultParsed.push(companyData);
-                    }
-                });
-
-                resolve(resultParsed);
+                resolve(resultRaw);
             }).catch(() => {
                 reject();
             });
