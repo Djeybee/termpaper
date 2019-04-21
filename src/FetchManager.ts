@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Indicator } from "./Models";
 
 export class FetchManager {
 
@@ -33,12 +34,21 @@ export class FetchManager {
                 "3-13", //Operating Cash Flow
                 "4-0", //Gross margin
                 "4-9", //Return on assets
-                "1-19", //EBIT
+                '1-58',//NetIncome
+                '3-32'//DividendsPaid
+            ];
+
+            const ttmIndicators: string [] = [
+                '1-19',// Indicator.EBIT,
+                '2-1',//Indicator.CashAndCashEquivalents,
+                '2-47',//: Indicator.CurrentDebt,
+                '2-73',//: Indicator.TotalLiabilities,
+                '2-74'//: Indicator.PreferredEquity,
             ];
 
 
             let search: any[] = [];
-            
+
             search.push({
                 "indicatorId": "4-11"
             });
@@ -69,6 +79,18 @@ export class FetchManager {
                 search.push({
                     "indicatorId": indicatorId,
                     "meta": this.getPeriodYear(year + 1)
+                });
+            });
+
+            ttmIndicators.forEach((indicatorId: string) => {
+                search.push({
+                    "indicatorId": indicatorId,
+                    "meta": this.getPeriodTTM(year)
+                });
+
+                search.push({
+                    "indicatorId": indicatorId,
+                    "meta": this.getPeriodTTM(year + 1)
                 });
             });
 
@@ -109,6 +131,21 @@ export class FetchManager {
             {
                 "id": 6,
                 "value": "q1",
+                "operator": "eq"
+            },
+            {
+                "id": 7,
+                "value": year,
+                "operator": "eq"
+            }
+        ];
+    }
+
+    public static getPeriodTTM(year: number) {
+        return [
+            {
+                "id": 6,
+                "value": "ttm-1",
                 "operator": "eq"
             },
             {

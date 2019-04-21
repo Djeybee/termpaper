@@ -368,6 +368,36 @@ export class CompanyData {
                     companyData.sMarketCap = stringValue;
                     break;
                 }
+
+                case Indicator.EBIT: {
+                    currentContainer.EBIT = value;
+                    break;
+                }
+                case Indicator.CashAndCashEquivalents: {
+                    currentContainer.CashAndCashEquivalents = value;
+                    break;
+                }
+                case Indicator.CurrentDebt: {
+                    currentContainer.CurrentDebt = value;
+                    break;
+                }
+                case Indicator.TotalLiabilities: {
+                    currentContainer.TotalLiabilities = value;
+                    break;
+                }
+                case Indicator.PreferredEquity: {
+                    currentContainer.PreferredEquity = value;
+                    break;
+                }
+                case Indicator.NetIncome: {
+                    currentContainer.NetIncome = value;
+                    break;
+                }
+                case Indicator.DividendsPaid: {
+                    currentContainer.DividendsPaid = value;
+                    break;
+                }
+
             }
 
             addedKeys.push(key);
@@ -473,6 +503,14 @@ export class CompanyDataByYear {
     public debtToAssetRatio: number = 0;
     public currentRatio: number = 0;
     public returnOnAssets: number = 0;
+
+    public EBIT: number = 0;
+    public CashAndCashEquivalents: number = 0;
+    public CurrentDebt: number = 0;
+    public TotalLiabilities: number = 0;
+    public PreferredEquity: number = 0;
+    public NetIncome: number = 0;
+    public DividendsPaid: number = 0;
 
 
     public sRevenues: string = '';
