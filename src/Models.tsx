@@ -115,17 +115,6 @@ export class CompanyData {
         //LEVI
         this.LEVI = (this.nextYearData.totalDebt / this.nextYearData.totalAssets) / (this.currentYearData.totalDebt / this.currentYearData.totalAssets);
 
-        //TLTA
-        this.TLTA = this.nextYearData.totalCurrentLiabilities / this.nextYearData.totalAssets;
-
-        //SATA
-        this.SATA = this.nextYearData.revenues / this.nextYearData.totalAssets;
-
-        //LOGTA
-        this.LOGTA = this.nextYearData.revenues / this.nextYearData.totalAssets;
-
-        //CATA
-        this.CATA = this.nextYearData.totalCurrentAssets / this.nextYearData.totalAssets
 
         if (!isFinite(this.AQI) || isNaN(this.AQI) || this.AQI == 0) {
             this.AQI = 1;
@@ -160,6 +149,20 @@ export class CompanyData {
         }
 
         return calculated;
+    }
+
+    public static calculateLastVars(company: CompanyData) {
+        //TLTA
+        company.TLTA = company.nextYearData.totalCurrentLiabilities / company.nextYearData.totalAssets;
+
+        //SATA
+        company.SATA = company.nextYearData.revenues / company.nextYearData.totalAssets;
+
+        //LOGTA
+        company.LOGTA = company.nextYearData.revenues / company.nextYearData.totalAssets;
+
+        //CATA
+        company.CATA = company.nextYearData.totalCurrentAssets / company.nextYearData.totalAssets
     }
 
     public static createWithJson(data: any, year: number, skipNulls: boolean): CompanyData {
@@ -784,6 +787,8 @@ export class CompanyCategory {
             if (category.filteredCompanies.length > 0) {
                 category.filteredCompanies.forEach((company: CompanyData) => {
                     names.push(company.name);
+
+                    CompanyData.calculateLastVars(company);
 
                     DSR.push(company.DSR);
                     GMI.push(company.GMI);
