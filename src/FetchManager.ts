@@ -38,11 +38,7 @@ export class FetchManager {
 
 
             let search: any[] = [];
-
-            // search.push({
-            //     "indicatorId": "0-1"
-            // });
-            //
+            
             search.push({
                 "indicatorId": "4-11"
             });
@@ -86,9 +82,9 @@ export class FetchManager {
                 })
             ).then((response: any) => {
                 console.log('response = ', response);
-                // resolve(response.data);
+                resolve(response.data);
             }).catch(() => {
-                // reject();
+                reject();
             });
         });
     }

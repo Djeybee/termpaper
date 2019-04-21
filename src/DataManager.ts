@@ -202,8 +202,8 @@ export class RequestData {
 
 const companiesData: CategoryRequestData[] = [
     new CategoryRequestData(2018, Category.Industrials, 0),
-    new CategoryRequestData(2017, Category.Industrials, 0),
-    new CategoryRequestData(2016, Category.Industrials, 0),
+    // new CategoryRequestData(2017, Category.Industrials, 0),
+    // new CategoryRequestData(2016, Category.Industrials, 0),
     // new CategoryRequestData(2015, Category.Industrials, 0),
     // new CategoryRequestData(2014, Category.Industrials, 0),
     // new CategoryRequestData(2013, Category.Industrials, 0),

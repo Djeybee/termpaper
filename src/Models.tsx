@@ -214,6 +214,9 @@ export class CompanyData {
 
         const simId: number = data['simId'];
 
+        const companyName: string = data['name'];
+        companyData.name = companyName;
+
         const valuesRaw: [] = data['values'];
 
         const addedKeys: string[] = [];
