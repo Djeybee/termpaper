@@ -75,6 +75,11 @@ export class CompanyData {
 
     public revenueChange: number = 0;
 
+    public TLTA: number = 0;
+    public SATA: number = 0;
+    public LOGTA: number = 0;
+    public CATA: number = 0;
+
     public static calculateRevenueChange(company: CompanyData) {
         company.revenueChange = (company.nextYearData.revenues - company.currentYearData.revenues) / company.currentYearData.revenues;
     }
@@ -110,6 +115,17 @@ export class CompanyData {
         //LEVI
         this.LEVI = (this.nextYearData.totalDebt / this.nextYearData.totalAssets) / (this.currentYearData.totalDebt / this.currentYearData.totalAssets);
 
+        //TLTA
+        this.TLTA = this.nextYearData.totalCurrentLiabilities / this.nextYearData.totalAssets;
+
+        //SATA
+        this.SATA = this.nextYearData.revenues / this.nextYearData.totalAssets;
+
+        //LOGTA
+        this.LOGTA = this.nextYearData.revenues / this.nextYearData.totalAssets;
+
+        //CATA
+        this.CATA = this.nextYearData.totalCurrentAssets / this.nextYearData.totalAssets
 
         if (!isFinite(this.AQI) || isNaN(this.AQI) || this.AQI == 0) {
             this.AQI = 1;
@@ -758,6 +774,11 @@ export class CompanyCategory {
         const SGAI: any[] = ['SGAI:'];
         const Accruals: any[] = ['Accruals:'];
         const LEVI: any[] = ['LEVI:'];
+        const TLTA: any[] = ['TLTA:'];
+        const SATA: any[] = ['SATA:'];
+        const LOGTA: any[] = ['LOGTA:'];
+        const CATA: any[] = ['CATA:'];
+
 
         categories.forEach((category: CompanyCategory) => {
             if (category.filteredCompanies.length > 0) {
@@ -772,11 +793,15 @@ export class CompanyCategory {
                     SGAI.push(company.SGAI);
                     Accruals.push(company.Accruals);
                     LEVI.push(company.LEVI);
+                    TLTA.push(company.TLTA);
+                    SATA.push(company.SATA);
+                    LOGTA.push(company.LOGTA);
+                    CATA.push(company.CATA);
                 });
             }
         });
 
-        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI];
+        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA];
     }
 
     public static categoriesMedianToJson(categories: CompanyCategory[]): any[] {
