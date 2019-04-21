@@ -1,5 +1,6 @@
 import { bool, number } from "prop-types";
 import { unmountComponentAtNode } from "react-dom";
+import CoverageMap = jest.CoverageMap;
 
 export enum Indicator {
     NameOfCompany,
@@ -80,6 +81,8 @@ export class CompanyData {
     public LOGTA: number = 0;
     public CATA: number = 0;
 
+    public ALTMAN_Z_SCORE: number = 0;
+
     public static calculateRevenueChange(company: CompanyData) {
         company.revenueChange = (company.nextYearData.revenues - company.currentYearData.revenues) / company.currentYearData.revenues;
     }
@@ -159,10 +162,32 @@ export class CompanyData {
         company.SATA = company.nextYearData.revenues / company.nextYearData.totalAssets;
 
         //LOGTA
-        company.LOGTA = company.nextYearData.revenues / company.nextYearData.totalAssets;
+        company.LOGTA = Math.log(company.nextYearData.totalAssets);
 
         //CATA
         company.CATA = company.nextYearData.totalCurrentAssets / company.nextYearData.totalAssets
+
+        company.ALTMAN_Z_SCORE = CompanyData.calculateAltmanZScore(company);
+    }
+
+    public static calculateAltmanZScore(company: CompanyData): number {
+        // XI = (current assets - current liabilities) / total assets,
+        //     X2 = (Net income-dividend paid )/ total assets,
+        //     X3 = EBIT / total assets,
+        //     X4 = market capitalization/ total liabilities,
+        //     X5 = revenue / total assets.
+
+        const X1 = (company.currentYearData.totalCurrentAssets - company.currentYearData.totalCurrentLiabilities)
+            / company.currentYearData.totalAssets;
+
+        const X2 = (company.currentYearData.receivablesNet - company.currentYearData.revenues)
+            / company.currentYearData.totalAssets;
+
+        const X3 = company.currentYearData.receivablesNet / company.currentYearData.totalAssets;
+
+        const X4 = company.marketCap
+
+        return 0;
     }
 
     public static createWithJson(data: any, year: number, skipNulls: boolean): CompanyData {
