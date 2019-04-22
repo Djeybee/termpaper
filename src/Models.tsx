@@ -62,8 +62,8 @@ export const CategoryNames = {
 export class CompanyCategoryParsed {
     //local
     public filteredCompanies: CompanyData[] = [];
-    public companiesByYear: { [key: number]: CompanyData[] } = null;
-    public companiesByYear75: { [key: number]: CompanyData } = null;
+    public companiesByYear: { [key: number]: CompanyData[] } = {};
+    public companiesByYear75: { [key: number]: CompanyData } = {};
     //local
 
     public category: Category = 0;
@@ -350,34 +350,36 @@ export class CompanyCategoryParsed {
     }
 
     public static filterCategoriesByYear(categories: CompanyCategoryParsed[]): CompanyCategoryParsed[] {
+
+        const filter: Category[] = [
+            Category.BasicMaterials,
+            Category.ConsumerCyclical,
+            Category.ConsumerDefensive,
+            Category.Energy,
+            Category.Healthcare,
+            Category.Industrials,
+            Category.Technology
+        ];
+
         const filteredCategories: { [key: number]: CompanyCategoryParsed } = {};
 
         categories.forEach((category: CompanyCategoryParsed) => {
             if (category.companies.length) {
-                if (!filteredCategories[category.category]) {
-                    filteredCategories[category.category] = category;
-                }
-
-                const filteredCategory: CompanyCategoryParsed = filteredCategories[category.category];
-
-                if (!filteredCategory.companiesByYear) {
-                    filteredCategory.companiesByYear = {};
-                }
-
                 category.companies.forEach((company: CompanyData) => {
-
                     calculateRevenueChange(company);
 
                     const year: number = company.prevYear.year;
 
-                    if (!filteredCategory.companiesByYear[year]) {
-                        filteredCategory.companiesByYear[year] = [];
+                    if (!category.companiesByYear[year]) {
+                        category.companiesByYear[year] = [];
                     }
 
-                    filteredCategory.companiesByYear[year].push(company);
+                    category.companiesByYear[year].push(company);
                 });
 
-                filteredCategories[category.category] = filteredCategory;
+                if (filter.indexOf(category.category) != -1) {
+                    filteredCategories[category.category] = category;
+                }
             }
         });
 

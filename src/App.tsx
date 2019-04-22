@@ -116,32 +116,6 @@ class App extends React.Component<AppProps, AppState> {
                             localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedianRevenue));
                             this.setMedianRevenueJson(catsArrayMedianRevenue);
                         }
-
-                        // let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
-                        //
-                        // if (categoriesContainer) {
-                        // const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
-                        //
-                        // const catsArray: any[] = CompanyCategory.categoriesToJson(filteredCategories);
-                        // localStorage.setItem('rawData', JSON.stringify(catsArray));
-                        //
-                        // const catsArrayCalculated: any[] = CompanyCategory.categoriesCalculatedToJson(filteredCategories);
-                        // localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
-                        //
-                        // const catsArrayMedian: any[] = CompanyCategory.categoriesMedianToJson(filteredCategories);
-                        // localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
-                        //
-                        // const filteredCategoriesByYear: CompanyCategory[] = CompanyCategory.filterCategoriesByYear(categoriesContainer.categories);
-                        // const catsArrayMedianRevenue: any[] = CompanyCategory.categoriesMedianRevenueToJson(filteredCategoriesByYear);
-                        // localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedianRevenue));
-                        //
-                        // this.setRawJson(catsArray);
-                        // this.setCalculatedJson(catsArrayCalculated);
-                        // this.setMedianJson(catsArrayMedian);
-                        // this.setMedianRevenueJson(catsArrayMedianRevenue);
-
-
-                        // }
                     }}>
                     Generate tables
                 </button>
