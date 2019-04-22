@@ -444,8 +444,12 @@ export class CompanyData {
     public CATA: number = 0;
 
     public ALTMAN_Z_SCORE: number = 0;
-
     public GROWTH: number = 0;
+    public RSST_ACC: number = 0;
+    public CH_REC: number = 0;
+    public SOFT_ASSETS: number = 0;
+    public CH_CS: number = 0;
+    public CH_ROA: number = 0;
 }
 
 export class CompanyValuesByYear {
