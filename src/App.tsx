@@ -86,19 +86,22 @@ class App extends React.Component<AppProps, AppState> {
                     onClick={() => {
                         const categoriesContainer: { [key: number]: CompanyCategoryParsed } = allData as CompanyCategoryParsed[];
 
-                        const categorinesArray: CompanyCategoryParsed[] = [];
+                        const categoriesArray: CompanyCategoryParsed[] = [];
 
                         Object.keys(categoriesContainer).forEach((key: any) => {
-                            categorinesArray.push(categoriesContainer[key]);
+                            categoriesArray.push(categoriesContainer[key]);
                         });
 
                         if (categoriesContainer) {
                             // const filteredCategories: CompanyCategoryParsed[] = CompanyCategory.filterCategories(categoriesContainer.categories);
 
-                            const catsArray: any[] = CompanyCategoryParsed.categoriesToJson(categorinesArray);
+                            const catsArray: any[] = CompanyCategoryParsed.categoriesToJson(categoriesArray);
                             localStorage.setItem('rawData', JSON.stringify(catsArray));
-
                             this.setRawJson(catsArray);
+
+                            const catsArrayCalculated: any[] = CompanyCategoryParsed.categoriesCalculatedToJson(categoriesArray);
+                            localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
+                            this.setCalculatedJson(catsArrayCalculated);
                         }
 
 

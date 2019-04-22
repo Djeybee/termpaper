@@ -210,6 +210,74 @@ export class CompanyCategoryParsed {
 
         return catJson;
     }
+
+
+    public static categoriesCalculatedToJson(categories: CompanyCategoryParsed[]): any[] {
+        const names: any[] = ['Company name:',];
+
+        const DSR: any[] = ['DSR:'];
+        const GMI: any[] = ['GMI:'];
+        const AQI: any[] = ['AQI:'];
+        const SGI: any[] = ['SGI:'];
+        const DEPI: any[] = ['DEPI:'];
+        const SGAI: any[] = ['SGAI:'];
+        const Accruals: any[] = ['Accruals:'];
+        const LEVI: any[] = ['LEVI:'];
+        const TLTA: any[] = ['TLTA:'];
+        const SATA: any[] = ['SATA:'];
+        const LOGTA: any[] = ['LOGTA:'];
+        const CATA: any[] = ['CATA:'];
+
+
+        categories.forEach((category: CompanyCategoryParsed) => {
+            const filteredCompanies: CompanyData[] = CompanyCategoryParsed.filterCompaniesForDSR(category);
+
+            filteredCompanies.forEach((company: CompanyData) => {
+                names.push(company.name);
+
+                DSR.push(company.DSR);
+                GMI.push(company.GMI);
+                AQI.push(company.AQI);
+                SGI.push(company.SGI);
+                DEPI.push(company.DEPI);
+                SGAI.push(company.SGAI);
+                Accruals.push(company.Accruals);
+                LEVI.push(company.LEVI);
+                TLTA.push(company.TLTA);
+                SATA.push(company.SATA);
+                LOGTA.push(company.LOGTA);
+                CATA.push(company.CATA);
+            });
+        });
+
+        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA];
+    }
+
+
+    public static filterCompaniesForDSR(category: CompanyCategoryParsed): CompanyData[] {
+
+        const filteredCompanies: CompanyData[] = [];
+
+        const filterRules: {} = {
+            [Category.BasicMaterials]: 20,
+            [Category.ConsumerCyclical]: 10,
+            [Category.ConsumerDefensive]: 20,
+            [Category.Energy]: 20,
+            [Category.Healthcare]: 28,
+            [Category.Industrials]: 30,
+            [Category.Technology]: 43,
+        };
+
+        const maxNumberOfCompanies = filterRules[category.category];
+
+        category.companies.forEach((company: CompanyData) => {
+            if (filteredCompanies.length < maxNumberOfCompanies) {
+                filteredCompanies.push(company);
+            }
+        });
+
+        return filteredCompanies;
+    }
 }
 
 
@@ -221,6 +289,24 @@ export class CompanyData {
     public prevPrevYear: CompanyValuesByYear;
     public prevYear: CompanyValuesByYear;
     public currentYear: CompanyValuesByYear;
+
+    public DSR: number = 0;
+    public GMI: number = 0;
+    public AQI: number = 0;
+    public SGI: number = 0;
+    public DEPI: number = 0;
+    public SGAI: number = 0;
+    public Accruals: number = 0;
+    public LEVI: number = 0;
+
+    public revenueChange: number = 0;
+
+    public TLTA: number = 0;
+    public SATA: number = 0;
+    public LOGTA: number = 0;
+    public CATA: number = 0;
+
+    public ALTMAN_Z_SCORE: number = 0;
 }
 
 export class CompanyValuesByYear {
