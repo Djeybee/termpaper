@@ -366,8 +366,6 @@ export class CompanyCategoryParsed {
         categories.forEach((category: CompanyCategoryParsed) => {
             if (category.companies.length) {
                 category.companies.forEach((company: CompanyData) => {
-                    calculateRevenueChange(company);
-
                     const year: number = company.prevYear.year;
 
                     if (!category.companiesByYear[year]) {
@@ -560,9 +558,4 @@ export class CompanyValuesByYear {
     public sNetIncome: string = '';
     public sDividendsPaid: string = '';
 
-}
-
-
-const calculateRevenueChange = function (company: CompanyData) {
-    company.revenueChange = (company.currentYear.revenues - company.prevYear.revenues) / company.prevYear.revenues;
 }
