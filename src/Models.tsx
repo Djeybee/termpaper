@@ -113,70 +113,70 @@ export class CompanyCategoryParsed {
                 'first year', 'last year',
             ]);
 
-        //     category.companies.forEach((company: CompanyData) => {
-        //
-        //         const years: CompanyValuesByYear[] = [];
-        //
-        //         Object.keys(company.years).forEach((yearKey: any) => {
-        //             const year: CompanyValuesByYear = company.years[yearKey];
-        //
-        //             years.push(year);
-        //         });
-        //
-        //         const companyArray: any[] = [];
-        //
-        //         companyArray.push(`${company.name} (${company.currentYearData.year} - ${company.nextYearData.year})`);
-        //
-        //         companyArray.push(company.currentYearData.sRevenues);
-        //         companyArray.push(company.nextYearData.sRevenues);
-        //
-        //         companyArray.push(company.currentYearData.sSellingGeneralAndAdministrative);
-        //         companyArray.push(company.nextYearData.sSellingGeneralAndAdministrative);
-        //
-        //         companyArray.push(company.currentYearData.sIncomeFromContinuingOperations);
-        //         companyArray.push(company.nextYearData.sIncomeFromContinuingOperations);
-        //
-        //
-        //         companyArray.push(company.currentYearData.sReceivablesNet);
-        //         companyArray.push(company.nextYearData.sReceivablesNet);
-        //
-        //         companyArray.push(company.currentYearData.sTotalCurrentAssets);
-        //         companyArray.push(company.nextYearData.sTotalCurrentAssets);
-        //
-        //         companyArray.push(company.currentYearData.sPropertyPlantAndEquipmentNet);
-        //         companyArray.push(company.nextYearData.sPropertyPlantAndEquipmentNet);
-        //
-        //         companyArray.push(company.currentYearData.sTotalAssets);
-        //         companyArray.push(company.nextYearData.sTotalAssets);
-        //
-        //         companyArray.push(company.currentYearData.sTotalCurrentLiabilities);
-        //         companyArray.push(company.nextYearData.sTotalCurrentLiabilities);
-        //
-        //         companyArray.push(company.currentYearData.sTotalDebt);
-        //         companyArray.push(company.nextYearData.sTotalDebt);
-        //
-        //         companyArray.push(company.currentYearData.sDepreciationAmortisation);
-        //         companyArray.push(company.nextYearData.sDepreciationAmortisation);
-        //
-        //         companyArray.push(company.currentYearData.sOperatingCashFlow);
-        //         companyArray.push(company.nextYearData.sOperatingCashFlow);
-        //
-        //         companyArray.push(company.currentYearData.sGrossMargin);
-        //         companyArray.push(company.nextYearData.sGrossMargin);
-        //
-        //         companyArray.push(company.currentYearData.sDebtToAssetRatio);
-        //         companyArray.push(company.nextYearData.sDebtToAssetRatio);
-        //
-        //         companyArray.push(company.sMarketCap);
-        //
-        //         companyArray.push(company.currentYearData.sCurrentRatio);
-        //         companyArray.push(company.nextYearData.sCurrentRatio);
-        //
-        //         companyArray.push(company.currentYearData.sReturnOnAssets);
-        //         companyArray.push(company.nextYearData.sReturnOnAssets);
-        //
-        //         catJson.push(companyArray);
-        //     });
+            //     category.companies.forEach((company: CompanyData) => {
+            //
+            //         const years: CompanyValuesByYear[] = [];
+            //
+            //         Object.keys(company.years).forEach((yearKey: any) => {
+            //             const year: CompanyValuesByYear = company.years[yearKey];
+            //
+            //             years.push(year);
+            //         });
+            //
+            //         const companyArray: any[] = [];
+            //
+            //         companyArray.push(`${company.name} (${company.currentYearData.year} - ${company.nextYearData.year})`);
+            //
+            //         companyArray.push(company.currentYearData.sRevenues);
+            //         companyArray.push(company.nextYearData.sRevenues);
+            //
+            //         companyArray.push(company.currentYearData.sSellingGeneralAndAdministrative);
+            //         companyArray.push(company.nextYearData.sSellingGeneralAndAdministrative);
+            //
+            //         companyArray.push(company.currentYearData.sIncomeFromContinuingOperations);
+            //         companyArray.push(company.nextYearData.sIncomeFromContinuingOperations);
+            //
+            //
+            //         companyArray.push(company.currentYearData.sReceivablesNet);
+            //         companyArray.push(company.nextYearData.sReceivablesNet);
+            //
+            //         companyArray.push(company.currentYearData.sTotalCurrentAssets);
+            //         companyArray.push(company.nextYearData.sTotalCurrentAssets);
+            //
+            //         companyArray.push(company.currentYearData.sPropertyPlantAndEquipmentNet);
+            //         companyArray.push(company.nextYearData.sPropertyPlantAndEquipmentNet);
+            //
+            //         companyArray.push(company.currentYearData.sTotalAssets);
+            //         companyArray.push(company.nextYearData.sTotalAssets);
+            //
+            //         companyArray.push(company.currentYearData.sTotalCurrentLiabilities);
+            //         companyArray.push(company.nextYearData.sTotalCurrentLiabilities);
+            //
+            //         companyArray.push(company.currentYearData.sTotalDebt);
+            //         companyArray.push(company.nextYearData.sTotalDebt);
+            //
+            //         companyArray.push(company.currentYearData.sDepreciationAmortisation);
+            //         companyArray.push(company.nextYearData.sDepreciationAmortisation);
+            //
+            //         companyArray.push(company.currentYearData.sOperatingCashFlow);
+            //         companyArray.push(company.nextYearData.sOperatingCashFlow);
+            //
+            //         companyArray.push(company.currentYearData.sGrossMargin);
+            //         companyArray.push(company.nextYearData.sGrossMargin);
+            //
+            //         companyArray.push(company.currentYearData.sDebtToAssetRatio);
+            //         companyArray.push(company.nextYearData.sDebtToAssetRatio);
+            //
+            //         companyArray.push(company.sMarketCap);
+            //
+            //         companyArray.push(company.currentYearData.sCurrentRatio);
+            //         companyArray.push(company.nextYearData.sCurrentRatio);
+            //
+            //         companyArray.push(company.currentYearData.sReturnOnAssets);
+            //         companyArray.push(company.nextYearData.sReturnOnAssets);
+            //
+            //         catJson.push(companyArray);
+            //     });
         });
 
         return catJson;

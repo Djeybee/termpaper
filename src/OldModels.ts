@@ -135,7 +135,6 @@ export class CompanyData {
     }
 
     public static filterCompaniesByYear(companies: CompanyData[]): CompanyData[] {
-
         const uniqueCompanies: { [id: number]: { [id: number]: CompanyData } } = {};
 
         companies.forEach((company: CompanyData) => {
@@ -158,7 +157,7 @@ export class CompanyData {
 
         const superUniqueCompanies: CompanyData[] = [];
 
-        Object.keys(uniqueCompanies).forEach(function (key, index) {
+        Object.keys(uniqueCompanies).forEach(function (key, index) { 
             const companyByYear: { [id: number]: CompanyData } = uniqueCompanies[key];
 
             const companyYears: number[] = Object.keys(companyByYear).map((strKey: string) => {
@@ -186,7 +185,6 @@ export class CompanyData {
 
             superUniqueCompanies.push(companyData);
         });
-
 
         return superUniqueCompanies;
     }
