@@ -3,7 +3,6 @@ import './App.css';
 
 import * as XLSX from 'xlsx';
 import { CompanyCategoryParsed, CompanyData } from "./Models";
-import { CompanyCategory } from "./OldModels";
 
 var FileSaver = require('file-saver');
 
