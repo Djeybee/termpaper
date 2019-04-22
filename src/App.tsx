@@ -2,10 +2,13 @@ import * as React from 'react';
 import './App.css';
 
 import * as XLSX from 'xlsx';
+import { CompanyCategoryParsed } from "./Models";
+import { CompanyCategory } from "./OldModels";
 
 var FileSaver = require('file-saver');
 
 var resultsData = require('src/results.json');
+var allData = require('src/allData.json');
 
 interface AppProps {
 }
@@ -81,6 +84,27 @@ class App extends React.Component<AppProps, AppState> {
 
                 <button
                     onClick={() => {
+                        const categoriesContainer: { [key: number]: CompanyCategoryParsed } = allData as CompanyCategoryParsed[];
+
+                        const categorinesArray: CompanyCategoryParsed[] = [];
+
+                        Object.keys(categoriesContainer).forEach((key: any) => {
+                            categorinesArray.push(categoriesContainer[key]);
+                        });
+
+                        if (categoriesContainer) {
+                            // const filteredCategories: CompanyCategoryParsed[] = CompanyCategory.filterCategories(categoriesContainer.categories);
+
+                            const catsArray: any[] = CompanyCategoryParsed.categoriesToJson(categorinesArray);
+                            localStorage.setItem('rawData', JSON.stringify(catsArray));
+
+                            this.setRawJson(catsArray);
+                        }
+
+
+
+                        console.log(categoriesContainer);
+
                         // let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
 
                         // if (categoriesContainer) {
