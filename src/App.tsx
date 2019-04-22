@@ -1,11 +1,7 @@
 import * as React from 'react';
 import './App.css';
 
-import { DataManager } from "./DataManager";
-import { CompanyCategory } from "./Models";
-import { Table } from "./Table";
 import * as XLSX from 'xlsx';
-import { networkInterfaces } from "os";
 
 var FileSaver = require('file-saver');
 
@@ -15,7 +11,6 @@ interface AppProps {
 }
 
 interface AppState {
-    categories: CompanyCategory[];
     sheetRaw: any;
     sheetCalculated: any;
     sheetMedian: any;
@@ -24,7 +19,6 @@ interface AppState {
 
 class App extends React.Component<AppProps, AppState> {
     state: AppState = {
-        categories: [],
         sheetRaw: null,
         sheetCalculated: null,
         sheetMedian: null,
@@ -77,50 +71,41 @@ class App extends React.Component<AppProps, AppState> {
         return (
             <div className="App">
                 <div style={{width: 'max-content'}}>
-                    <Table categories={this.state.categories}/>
+                    {/*<Table categories={this.state.categories}/>*/}
                 </div>
                 <button
                     onClick={() => {
-                        DataManager.loadAllData().then((categories: CompanyCategory[]) => {
-                            const categoriesContainer: CategoriesContainer = new CategoriesContainer();
-                            categoriesContainer.categories = categories;
-
-                            const resultString: string = JSON.stringify(categoriesContainer);
-
-                            var blob = new Blob([resultString], {type: "text/plain;charset=utf-8"});
-                            FileSaver.saveAs(blob, "results.txt");
-                        });
                     }}>
                     Load data
                 </button>
 
                 <button
                     onClick={() => {
-                        let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
+                        // let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
 
-                        if (categoriesContainer) {
-                            const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
+                        // if (categoriesContainer) {
+                        // const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
+                        //
+                        // const catsArray: any[] = CompanyCategory.categoriesToJson(filteredCategories);
+                        // localStorage.setItem('rawData', JSON.stringify(catsArray));
+                        //
+                        // const catsArrayCalculated: any[] = CompanyCategory.categoriesCalculatedToJson(filteredCategories);
+                        // localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
+                        //
+                        // const catsArrayMedian: any[] = CompanyCategory.categoriesMedianToJson(filteredCategories);
+                        // localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
+                        //
+                        // const filteredCategoriesByYear: CompanyCategory[] = CompanyCategory.filterCategoriesByYear(categoriesContainer.categories);
+                        // const catsArrayMedianRevenue: any[] = CompanyCategory.categoriesMedianRevenueToJson(filteredCategoriesByYear);
+                        // localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedianRevenue));
+                        //
+                        // this.setRawJson(catsArray);
+                        // this.setCalculatedJson(catsArrayCalculated);
+                        // this.setMedianJson(catsArrayMedian);
+                        // this.setMedianRevenueJson(catsArrayMedianRevenue);
 
-                            const catsArray: any[] = CompanyCategory.categoriesToJson(filteredCategories);
-                            localStorage.setItem('rawData', JSON.stringify(catsArray));
 
-                            const catsArrayCalculated: any[] = CompanyCategory.categoriesCalculatedToJson(filteredCategories);
-                            localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
-
-                            const catsArrayMedian: any[] = CompanyCategory.categoriesMedianToJson(filteredCategories);
-                            localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
-
-                            const filteredCategoriesByYear: CompanyCategory[] = CompanyCategory.filterCategoriesByYear(categoriesContainer.categories);
-                            const catsArrayMedianRevenue: any[] = CompanyCategory.categoriesMedianRevenueToJson(filteredCategoriesByYear);
-                            localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedianRevenue));
-
-                            this.setRawJson(catsArray);
-                            this.setCalculatedJson(catsArrayCalculated);
-                            this.setMedianJson(catsArrayMedian);
-                            this.setMedianRevenueJson(catsArrayMedianRevenue);
-
-
-                        }
+                        // }
                     }}>
                     Generate tables
                 </button>
@@ -244,9 +229,5 @@ class App extends React.Component<AppProps, AppState> {
         });
     }
 }
-
-export class CategoriesContainer {
-    public categories: CompanyCategory[] = [];
-};
 
 export default App;
