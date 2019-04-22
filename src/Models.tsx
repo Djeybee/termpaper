@@ -113,70 +113,71 @@ export class CompanyCategoryParsed {
                 'first year', 'last year',
             ]);
 
-            //     category.companies.forEach((company: CompanyData) => {
-            //
-            //         const years: CompanyValuesByYear[] = [];
-            //
-            //         Object.keys(company.years).forEach((yearKey: any) => {
-            //             const year: CompanyValuesByYear = company.years[yearKey];
-            //
-            //             years.push(year);
-            //         });
-            //
-            //         const companyArray: any[] = [];
-            //
-            //         companyArray.push(`${company.name} (${company.currentYearData.year} - ${company.nextYearData.year})`);
-            //
-            //         companyArray.push(company.currentYearData.sRevenues);
-            //         companyArray.push(company.nextYearData.sRevenues);
-            //
-            //         companyArray.push(company.currentYearData.sSellingGeneralAndAdministrative);
-            //         companyArray.push(company.nextYearData.sSellingGeneralAndAdministrative);
-            //
-            //         companyArray.push(company.currentYearData.sIncomeFromContinuingOperations);
-            //         companyArray.push(company.nextYearData.sIncomeFromContinuingOperations);
-            //
-            //
-            //         companyArray.push(company.currentYearData.sReceivablesNet);
-            //         companyArray.push(company.nextYearData.sReceivablesNet);
-            //
-            //         companyArray.push(company.currentYearData.sTotalCurrentAssets);
-            //         companyArray.push(company.nextYearData.sTotalCurrentAssets);
-            //
-            //         companyArray.push(company.currentYearData.sPropertyPlantAndEquipmentNet);
-            //         companyArray.push(company.nextYearData.sPropertyPlantAndEquipmentNet);
-            //
-            //         companyArray.push(company.currentYearData.sTotalAssets);
-            //         companyArray.push(company.nextYearData.sTotalAssets);
-            //
-            //         companyArray.push(company.currentYearData.sTotalCurrentLiabilities);
-            //         companyArray.push(company.nextYearData.sTotalCurrentLiabilities);
-            //
-            //         companyArray.push(company.currentYearData.sTotalDebt);
-            //         companyArray.push(company.nextYearData.sTotalDebt);
-            //
-            //         companyArray.push(company.currentYearData.sDepreciationAmortisation);
-            //         companyArray.push(company.nextYearData.sDepreciationAmortisation);
-            //
-            //         companyArray.push(company.currentYearData.sOperatingCashFlow);
-            //         companyArray.push(company.nextYearData.sOperatingCashFlow);
-            //
-            //         companyArray.push(company.currentYearData.sGrossMargin);
-            //         companyArray.push(company.nextYearData.sGrossMargin);
-            //
-            //         companyArray.push(company.currentYearData.sDebtToAssetRatio);
-            //         companyArray.push(company.nextYearData.sDebtToAssetRatio);
-            //
-            //         companyArray.push(company.sMarketCap);
-            //
-            //         companyArray.push(company.currentYearData.sCurrentRatio);
-            //         companyArray.push(company.nextYearData.sCurrentRatio);
-            //
-            //         companyArray.push(company.currentYearData.sReturnOnAssets);
-            //         companyArray.push(company.nextYearData.sReturnOnAssets);
-            //
-            //         catJson.push(companyArray);
-            //     });
+            category.companies.forEach((company: CompanyData) => {
+                // const years: CompanyValuesByYear[] = [];
+                //
+                // Object.keys(company.years).forEach((yearKey: any) => {
+                //     const year: CompanyValuesByYear = company.years[yearKey];
+                //
+                //     years.push(year);
+                // });
+
+                const companyArray: any[] = [];
+
+                console.log(company);
+
+                companyArray.push(`${company.name} (${company.prevYear.year} - ${company.currentYear.year})`);
+
+                companyArray.push(company.prevYear.sRevenues);
+                companyArray.push(company.currentYear.sRevenues);
+
+                companyArray.push(company.prevYear.sSellingGeneralAndAdministrative);
+                companyArray.push(company.currentYear.sSellingGeneralAndAdministrative);
+
+                companyArray.push(company.prevYear.sIncomeFromContinuingOperations);
+                companyArray.push(company.currentYear.sIncomeFromContinuingOperations);
+
+
+                companyArray.push(company.prevYear.sReceivablesNet);
+                companyArray.push(company.currentYear.sReceivablesNet);
+
+                companyArray.push(company.prevYear.sTotalCurrentAssets);
+                companyArray.push(company.currentYear.sTotalCurrentAssets);
+
+                companyArray.push(company.prevYear.sPropertyPlantAndEquipmentNet);
+                companyArray.push(company.currentYear.sPropertyPlantAndEquipmentNet);
+
+                companyArray.push(company.prevYear.sTotalAssets);
+                companyArray.push(company.currentYear.sTotalAssets);
+
+                companyArray.push(company.prevYear.sTotalCurrentLiabilities);
+                companyArray.push(company.currentYear.sTotalCurrentLiabilities);
+
+                companyArray.push(company.prevYear.sTotalDebt);
+                companyArray.push(company.currentYear.sTotalDebt);
+
+                companyArray.push(company.prevYear.sDepreciationAmortisation);
+                companyArray.push(company.currentYear.sDepreciationAmortisation);
+
+                companyArray.push(company.prevYear.sOperatingCashFlow);
+                companyArray.push(company.currentYear.sOperatingCashFlow);
+
+                companyArray.push(company.prevYear.sGrossMargin);
+                companyArray.push(company.currentYear.sGrossMargin);
+
+                companyArray.push(company.prevYear.sDebtToAssetRatio);
+                companyArray.push(company.currentYear.sDebtToAssetRatio);
+
+                companyArray.push(company.currentYear.sMarketCap);
+
+                companyArray.push(company.prevYear.sCurrentRatio);
+                companyArray.push(company.currentYear.sCurrentRatio);
+
+                companyArray.push(company.prevYear.sReturnOnAssets);
+                companyArray.push(company.currentYear.sReturnOnAssets);
+
+                catJson.push(companyArray);
+            });
         });
 
         return catJson;
@@ -188,9 +189,15 @@ export class CompanyData {
     public simId: number = 0;
     public name: string = '';
     public years: { [key: number]: CompanyValuesByYear } = {};
+
+    public prevPrevYear: CompanyValuesByYear;
+    public prevYear: CompanyValuesByYear;
+    public currentYear: CompanyValuesByYear;
 }
 
 export class CompanyValuesByYear {
+    public year: number = 0;
+
     public marketCap: number = 0;
     public revenues: number = 0;
     public sellingGeneralAndAdministrative: number = 0;
@@ -238,4 +245,5 @@ export class CompanyValuesByYear {
     public sPreferredEquity: string = '';
     public sNetIncome: string = '';
     public sDividendsPaid: string = '';
+
 }
