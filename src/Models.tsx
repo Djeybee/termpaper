@@ -234,7 +234,11 @@ export class CompanyCategoryParsed {
         const CATA: any[] = ['CATA:'];
         const ALTMAN_Z_SCORE: any[] = ['ALTMAN Z SCORE:'];
         const GROWTH: any[] = ['GROWTH:'];
-
+        const RSST_ACC: any[] = ['RSST_ACC:'];
+        const CH_REC: any[] = ['CH_REC:'];
+        const SOFT_ASSETS: any[] = ['SOFT_ASSETS:'];
+        const CH_CS: any[] = ['CH_CS:'];
+        const CH_ROA: any[] = ['CH_ROA:'];
 
         categories.forEach((category: CompanyCategoryParsed) => {
             category.companies.forEach((company: CompanyData) => {
@@ -254,10 +258,15 @@ export class CompanyCategoryParsed {
                 CATA.push(company.CATA);
                 ALTMAN_Z_SCORE.push(company.ALTMAN_Z_SCORE);
                 GROWTH.push(company.GROWTH);
+                RSST_ACC.push(company.RSST_ACC);
+                CH_REC.push(company.CH_REC);
+                SOFT_ASSETS.push(company.SOFT_ASSETS);
+                CH_CS.push(company.CH_CS);
+                CH_ROA.push(company.CH_ROA);
             });
         });
 
-        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA, ALTMAN_Z_SCORE, GROWTH];
+        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA, ALTMAN_Z_SCORE, GROWTH, RSST_ACC, CH_REC, SOFT_ASSETS, CH_CS, CH_ROA];
     }
 
 
