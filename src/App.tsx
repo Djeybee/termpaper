@@ -197,8 +197,11 @@ class App extends React.Component<AppProps, AppState> {
                     </button>
                 </div>
                 <div dangerouslySetInnerHTML={{__html: htmlRaw}}/>
+                <div style={{backgroundColor: 'grey', flexGrow: 1, height: 5}}/>
                 <div dangerouslySetInnerHTML={{__html: htmlCalculated}}/>
+                <div style={{backgroundColor: 'grey', width: '100%', height: 5}}/>
                 <div dangerouslySetInnerHTML={{__html: htmlMedial}}/>
+                <div style={{backgroundColor: 'grey', width: '100%', height: 5}}/>
                 <div dangerouslySetInnerHTML={{__html: htmlMedianRevenue}}/>
             </div>
         );
