@@ -111,8 +111,7 @@ class App extends React.Component<AppProps, AppState> {
                             localStorage.setItem('medianData', JSON.stringify(catsArrayMedian));
                             this.setMedianJson(catsArrayMedian);
 
-                            const filteredCategoriesByYear: CompanyCategoryParsed[] = CompanyCategoryParsed.filterCategoriesByYear(categoriesArray);
-                            const catsArrayMedianRevenue: any[] = CompanyCategoryParsed.categoriesMedianRevenueToJson(filteredCategoriesByYear);
+                            const catsArrayMedianRevenue: any[] = CompanyCategoryParsed.categoriesMedianRevenueToJson(categoriesArray);
                             localStorage.setItem('medianRevenueData', JSON.stringify(catsArrayMedianRevenue));
                             this.setMedianRevenueJson(catsArrayMedianRevenue);
                         }

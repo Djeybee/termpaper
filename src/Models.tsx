@@ -62,14 +62,12 @@ export const CategoryNames = {
 export class CompanyCategoryParsed {
     //local
     public filteredCompanies: CompanyData[] = [];
-    public companiesByYear: { [key: number]: CompanyData[] } = {};
-    public companiesByYear75: { [key: number]: CompanyData } = {};
     //local
 
     public category: Category = 0;
     public categoryName: string = '';
     public companies: CompanyData[] = [];
-
+    public quantile: { [key: number]: number } = {}
 
     constructor(category: Category) {
         this.category = category;
@@ -349,7 +347,10 @@ export class CompanyCategoryParsed {
         ];
     }
 
-    public static filterCategoriesByYear(categories: CompanyCategoryParsed[]): CompanyCategoryParsed[] {
+    public static categoriesMedianRevenueToJson(categories: CompanyCategoryParsed[]): any[] {
+        let firstYear: number = 2000000;
+
+        let lastYear: number = 0;
 
         const filter: Category[] = [
             Category.BasicMaterials,
@@ -361,83 +362,24 @@ export class CompanyCategoryParsed {
             Category.Technology
         ];
 
-        const filteredCategories: { [key: number]: CompanyCategoryParsed } = {};
-
+        const filteredCategories: CompanyCategoryParsed[] = [];
         categories.forEach((category: CompanyCategoryParsed) => {
-            if (category.companies.length) {
-                category.companies.forEach((company: CompanyData) => {
-                    const year: number = company.prevYear.year;
 
-                    if (!category.companiesByYear[year]) {
-                        category.companiesByYear[year] = [];
-                    }
-
-                    category.companiesByYear[year].push(company);
-                });
-
-                if (filter.indexOf(category.category) != -1) {
-                    filteredCategories[category.category] = category;
-                }
+            if (filter.indexOf(category.category) != -1) {
+                filteredCategories.push(category);
             }
         });
 
-        const filteredCategoriesArr: CompanyCategoryParsed [] = [];
+        filteredCategories.forEach((category: CompanyCategoryParsed) => {
+            Object.keys(category.quantile).forEach((value: any) => {
+                if (value < firstYear) {
+                    firstYear = value;
+                }
 
-        Object.keys(filteredCategories).forEach((value: any) => {
-            const category: CompanyCategoryParsed = filteredCategories[value];
-
-            const newCompaniesByYear: { [key: number]: CompanyData[] } = {};
-            const newCompaniesByYear75: { [key: number]: CompanyData } = {};
-
-            Object.keys(category.companiesByYear).forEach((value: any) => {
-                let array: CompanyData[] = category.companiesByYear[value];
-
-                if (array.length > 1) {
-                    array = array.sort((a: CompanyData, b: CompanyData) => {
-                        if (a.revenueChange > b.revenueChange) {
-                            return 1;
-                        } else {
-                            return -1;
-                        }
-                    });
-
-                    newCompaniesByYear[value] = array;
-
-                    const position: number = Math.round(array.length / 100 * 75);
-
-                    newCompaniesByYear75[value] = array[position - 1];
+                if (value > lastYear) {
+                    lastYear = value;
                 }
             });
-
-
-            category.companiesByYear = newCompaniesByYear;
-            category.companiesByYear75 = newCompaniesByYear75;
-
-            console.log(category);
-
-            filteredCategoriesArr.push(filteredCategories[value]);
-        });
-
-        return filteredCategoriesArr
-    }
-
-    public static categoriesMedianRevenueToJson(categories: CompanyCategoryParsed[]): any[] {
-        let firstYear: number = 2000000;
-
-        let lastYear: number = 0;
-
-        categories.forEach((category: CompanyCategoryParsed) => {
-            if (category.companiesByYear75) {
-                Object.keys(category.companiesByYear75).forEach((value: any) => {
-                    if (value < firstYear) {
-                        firstYear = value;
-                    }
-
-                    if (value > lastYear) {
-                        lastYear = value;
-                    }
-                });
-            }
         });
 
         const firstRow: string[] = ['Industry/Year'];
@@ -452,26 +394,20 @@ export class CompanyCategoryParsed {
             firstRow.push(i.toString());
         }
 
-        categories.forEach((category: CompanyCategoryParsed) => {
+        filteredCategories.forEach((category: CompanyCategoryParsed) => {
+            const categoryRow: string[] = [category.categoryName];
 
-            console.log('categories = ', category.categoryName);
-            if (category.companiesByYear75) {
-                const categoryRow: string[] = [category.categoryName];
+            years.forEach((year: number) => {
+                const revenueChange: number = category.quantile[year];
+                if (revenueChange) {
+                    categoryRow.push(nFormatter(revenueChange));
+                } else {
+                    categoryRow.push("---");
+                }
+            });
 
-                years.forEach((year: number) => {
-                    const company: CompanyData = category.companiesByYear75[year];
-                    if (company) {
-                        categoryRow.push(company.revenueChange.toString());
-
-                    } else {
-                        categoryRow.push("---");
-                    }
-                });
-
-                rows.push(categoryRow);
-            }
+            rows.push(categoryRow);
         });
-
 
         return rows;
     }
