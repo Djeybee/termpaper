@@ -234,6 +234,7 @@ export class CompanyCategoryParsed {
         const SATA: any[] = ['SATA:'];
         const LOGTA: any[] = ['LOGTA:'];
         const CATA: any[] = ['CATA:'];
+        const ALTMAN_Z_SCORE: any[] = ['ALTMAN_Z_SCORE:'];
 
 
         categories.forEach((category: CompanyCategoryParsed) => {
@@ -252,6 +253,7 @@ export class CompanyCategoryParsed {
                 SATA.push(company.SATA);
                 LOGTA.push(company.LOGTA);
                 CATA.push(company.CATA);
+                CATA.push(company.ALTMAN_Z_SCORE);
             });
         });
 
@@ -529,7 +531,7 @@ export class CompanyValuesByYear {
     public currentDebt: number = 0;
     public totalLiabilities: number = 0;
     public preferredEquity: number = 0;
-    public NetIncome: number = 0;
+    public netIncome: number = 0;
     public dividendsPaid: number = 0;
 
     public sMarketCap: string = '';
