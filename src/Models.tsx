@@ -1,4 +1,4 @@
-import { nFormatter } from "./Misc";
+import { average, median, nFormatter } from "./Misc";
 import { OverscrollBehaviorProperty } from "csstype";
 
 export enum Indicator {
@@ -60,6 +60,7 @@ export const CategoryNames = {
 };
 
 export class CompanyCategoryParsed {
+    public filteredCompanies: CompanyData[] = [];
     public category: Category = 0;
     public categoryName: string = '';
     public companies: CompanyData[] = [];
@@ -230,9 +231,7 @@ export class CompanyCategoryParsed {
 
 
         categories.forEach((category: CompanyCategoryParsed) => {
-            const filteredCompanies: CompanyData[] = CompanyCategoryParsed.filterCompaniesForDSR(category);
-
-            filteredCompanies.forEach((company: CompanyData) => {
+            category.companies.forEach((company: CompanyData) => {
                 names.push(company.name);
 
                 DSR.push(company.DSR);
@@ -255,7 +254,6 @@ export class CompanyCategoryParsed {
 
 
     public static filterCompaniesForDSR(category: CompanyCategoryParsed): CompanyData[] {
-
         const filteredCompanies: CompanyData[] = [];
 
         const filterRules: {} = {
@@ -278,6 +276,71 @@ export class CompanyCategoryParsed {
 
         return filteredCompanies;
     }
+
+    public static categoriesMedianToJson(categories: CompanyCategoryParsed[]): any[] {
+        let companies: CompanyData[] = [];
+
+        categories.forEach((category: CompanyCategoryParsed) => {
+            companies = companies.concat(category.filteredCompanies);
+        });
+
+        const assets: number[] = [];
+        const sales: number[] = [];
+        const marketCap: number[] = [];
+
+        const wCapToTotalAssel: number[] = [];
+        const currentRatio: number[] = [];
+        const totalDebtToTotalAssets: number[] = [];
+
+        const returnOnAssets: number[] = [];
+        const salesGrowth: number[] = [];
+
+        companies.forEach((companyData: CompanyData) => {
+            assets.push(companyData.prevYear.totalAssets);
+            assets.push(companyData.currentYear.totalAssets);
+
+            sales.push(companyData.prevYear.revenues);
+            sales.push(companyData.currentYear.revenues);
+
+            marketCap.push(companyData.currentYear.marketCap);
+
+            wCapToTotalAssel.push((companyData.prevYear.totalCurrentAssets - companyData.prevYear.totalCurrentLiabilities) / companyData.prevYear.totalAssets);
+            wCapToTotalAssel.push((companyData.currentYear.totalCurrentAssets - companyData.currentYear.totalCurrentLiabilities) / companyData.currentYear.totalAssets);
+
+            currentRatio.push(companyData.prevYear.currentRatio);
+            currentRatio.push(companyData.currentYear.currentRatio);
+
+            totalDebtToTotalAssets.push(companyData.prevYear.debtToAssetRatio);
+            totalDebtToTotalAssets.push(companyData.currentYear.debtToAssetRatio);
+
+            returnOnAssets.push(companyData.prevYear.returnOnAssets);
+            returnOnAssets.push(companyData.currentYear.returnOnAssets);
+
+            salesGrowth.push((companyData.currentYear.revenues - companyData.prevYear.revenues) / companyData.prevYear.revenues);
+        });
+
+        console.log('sales:', JSON.stringify(sales));
+
+        console.log('Average sales = ', average(sales));
+
+        return [
+            ['', 'Mean', 'Median'],
+            ['Size', '', ''],
+            ['Assets', nFormatter(average(assets)), nFormatter(median(assets))],
+            ['Sales', nFormatter(average(sales)), nFormatter(median(sales))],
+            ['Market Value', nFormatter(average(marketCap)), nFormatter(median(marketCap))],
+            ['', '', ''],
+            ['Leverage/liquidity', '', ''],
+            ['Working capital to total assets', (average(wCapToTotalAssel)).toString(), (median(wCapToTotalAssel)).toString()],
+            ['Current ratio', (average(currentRatio)).toString(), (median(currentRatio)).toString()],
+            ['Total debt to total assets', (average(totalDebtToTotalAssets)).toString(), (median(totalDebtToTotalAssets)).toString()],
+            ['', '', ''],
+            ['Profitability/Growth', '', ''],
+            ['Return on assets', (average(returnOnAssets)).toString(), (median(returnOnAssets)).toString()],
+            ['Sales Growth', average(salesGrowth).toString(), median(salesGrowth).toString()],
+        ];
+    }
+
 }
 
 

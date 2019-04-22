@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 
 import * as XLSX from 'xlsx';
-import { CompanyCategoryParsed } from "./Models";
+import { CompanyCategoryParsed, CompanyData } from "./Models";
 import { CompanyCategory } from "./OldModels";
 
 var FileSaver = require('file-saver');
@@ -89,6 +89,10 @@ class App extends React.Component<AppProps, AppState> {
                         const categoriesArray: CompanyCategoryParsed[] = [];
 
                         Object.keys(categoriesContainer).forEach((key: any) => {
+                            const category: CompanyCategoryParsed = categoriesContainer[key];
+
+                            category.filteredCompanies = CompanyCategoryParsed.filterCompaniesForDSR(category);
+
                             categoriesArray.push(categoriesContainer[key]);
                         });
 
@@ -102,13 +106,12 @@ class App extends React.Component<AppProps, AppState> {
                             const catsArrayCalculated: any[] = CompanyCategoryParsed.categoriesCalculatedToJson(categoriesArray);
                             localStorage.setItem('calculatedData', JSON.stringify(catsArrayCalculated));
                             this.setCalculatedJson(catsArrayCalculated);
+
+
                         }
 
-
-                        console.log(categoriesContainer);
-
                         // let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
-
+                        //
                         // if (categoriesContainer) {
                         // const filteredCategories: CompanyCategory[] = CompanyCategory.filterCategories(categoriesContainer.categories);
                         //
