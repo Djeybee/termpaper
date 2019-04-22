@@ -102,7 +102,6 @@ class App extends React.Component<AppProps, AppState> {
                         }
 
 
-
                         console.log(categoriesContainer);
 
                         // let categoriesContainer: CategoriesContainer = resultsData as CategoriesContainer;
@@ -214,6 +213,13 @@ class App extends React.Component<AppProps, AppState> {
         sheet['!merges'].push({s: {r: 0, c: 25}, e: {r: 0, c: 26}});
         sheet['!merges'].push({s: {r: 0, c: 28}, e: {r: 0, c: 29}});
         sheet['!merges'].push({s: {r: 0, c: 30}, e: {r: 0, c: 31}});
+        sheet['!merges'].push({s: {r: 0, c: 31}, e: {r: 0, c: 32}});
+        sheet['!merges'].push({s: {r: 0, c: 33}, e: {r: 0, c: 34}});
+        sheet['!merges'].push({s: {r: 0, c: 35}, e: {r: 0, c: 36}});
+        sheet['!merges'].push({s: {r: 0, c: 37}, e: {r: 0, c: 38}});
+        sheet['!merges'].push({s: {r: 0, c: 39}, e: {r: 0, c: 40}});
+        sheet['!merges'].push({s: {r: 0, c: 41}, e: {r: 0, c: 42}});
+        sheet['!merges'].push({s: {r: 0, c: 43}, e: {r: 0, c: 4}});
 
         this.setState({
             sheetRaw: sheet,

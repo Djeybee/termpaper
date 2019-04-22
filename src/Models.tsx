@@ -88,7 +88,15 @@ export class CompanyCategoryParsed {
             'Market capitalization',
             'Current ratio', '',
             'Return on assets', '',
+            'EBIT', '',
+            'Cash and cash equivalents', '',
+            'Current debt', '',
+            'Total Liabilities', '',
+            'Preferred equity', '',
+            'Net income', '',
+            'Dividends paid', '',
         ]];
+
 
         categories.forEach((category: CompanyCategoryParsed) => {
 
@@ -111,17 +119,16 @@ export class CompanyCategoryParsed {
                 "",
                 'first year', 'last year',
                 'first year', 'last year',
+                'first year', 'last year',
+                'first year', 'last year',
+                'first year', 'last year',
+                'first year', 'last year',
+                'first year', 'last year',
+                'first year', 'last year',
+                'first year', 'last year',
             ]);
 
             category.companies.forEach((company: CompanyData) => {
-                // const years: CompanyValuesByYear[] = [];
-                //
-                // Object.keys(company.years).forEach((yearKey: any) => {
-                //     const year: CompanyValuesByYear = company.years[yearKey];
-                //
-                //     years.push(year);
-                // });
-
                 const companyArray: any[] = [];
 
                 console.log(company);
@@ -175,6 +182,27 @@ export class CompanyCategoryParsed {
 
                 companyArray.push(company.prevYear.sReturnOnAssets);
                 companyArray.push(company.currentYear.sReturnOnAssets);
+
+                companyArray.push(company.prevYear.sEBIT);
+                companyArray.push(company.currentYear.sEBIT);
+
+                companyArray.push(company.prevYear.sCashAndCashEquivalents);
+                companyArray.push(company.currentYear.sCashAndCashEquivalents);
+
+                companyArray.push(company.prevYear.sCurrentDebt);
+                companyArray.push(company.currentYear.sCurrentDebt);
+
+                companyArray.push(company.prevYear.sTotalLiabilities);
+                companyArray.push(company.currentYear.sTotalLiabilities);
+
+                companyArray.push(company.prevYear.sPreferredEquity);
+                companyArray.push(company.currentYear.sPreferredEquity);
+
+                companyArray.push(company.prevYear.sNetIncome);
+                companyArray.push(company.currentYear.sNetIncome);
+
+                companyArray.push(company.prevYear.sDividendsPaid);
+                companyArray.push(company.currentYear.sDividendsPaid);
 
                 catJson.push(companyArray);
             });
