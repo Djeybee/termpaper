@@ -232,7 +232,8 @@ export class CompanyCategoryParsed {
         const SATA: any[] = ['SATA:'];
         const LOGTA: any[] = ['LOGTA:'];
         const CATA: any[] = ['CATA:'];
-        const ALTMAN_Z_SCORE: any[] = ['ALTMAN_Z_SCORE:'];
+        const ALTMAN_Z_SCORE: any[] = ['ALTMAN Z SCORE:'];
+        const GROWTH: any[] = ['GROWTH:'];
 
 
         categories.forEach((category: CompanyCategoryParsed) => {
@@ -251,11 +252,12 @@ export class CompanyCategoryParsed {
                 SATA.push(company.SATA);
                 LOGTA.push(company.LOGTA);
                 CATA.push(company.CATA);
-                CATA.push(company.ALTMAN_Z_SCORE);
+                ALTMAN_Z_SCORE.push(company.ALTMAN_Z_SCORE);
+                GROWTH.push(company.GROWTH);
             });
         });
 
-        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA];
+        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA, ALTMAN_Z_SCORE, GROWTH];
     }
 
 
@@ -419,6 +421,7 @@ export class CompanyData {
     public simId: number = 0;
     public name: string = '';
     public years: { [key: number]: CompanyValuesByYear } = {};
+    public yearsArrayForRevenue: number[] = [];
 
     public prevPrevYear: CompanyValuesByYear;
     public prevYear: CompanyValuesByYear;
@@ -441,6 +444,8 @@ export class CompanyData {
     public CATA: number = 0;
 
     public ALTMAN_Z_SCORE: number = 0;
+
+    public GROWTH: number = 0;
 }
 
 export class CompanyValuesByYear {
