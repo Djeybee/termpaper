@@ -60,10 +60,6 @@ export const CategoryNames = {
 };
 
 export class CompanyCategoryParsed {
-    //local
-    public filteredCompanies: CompanyData[] = [];
-    //local
-
     public category: Category = 0;
     public categoryName: string = '';
     public companies: CompanyData[] = [];
