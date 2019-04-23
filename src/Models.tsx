@@ -136,74 +136,74 @@ export class CompanyCategoryParsed {
 
                 companyArray.push(`${company.name} (${company.prevYear.year} - ${company.currentYear.year})`);
 
-                companyArray.push(company.prevYear.sRevenues);
-                companyArray.push(company.currentYear.sRevenues);
+                companyArray.push(company.prevYear.revenues);
+                companyArray.push(company.currentYear.revenues);
 
-                companyArray.push(company.prevYear.sSellingGeneralAndAdministrative);
-                companyArray.push(company.currentYear.sSellingGeneralAndAdministrative);
+                companyArray.push(company.prevYear.sellingGeneralAndAdministrative);
+                companyArray.push(company.currentYear.sellingGeneralAndAdministrative);
 
-                companyArray.push(company.prevYear.sIncomeFromContinuingOperations);
-                companyArray.push(company.currentYear.sIncomeFromContinuingOperations);
+                companyArray.push(company.prevYear.incomeFromContinuingOperations);
+                companyArray.push(company.currentYear.incomeFromContinuingOperations);
 
 
-                companyArray.push(company.prevYear.sReceivablesNet);
-                companyArray.push(company.currentYear.sReceivablesNet);
+                companyArray.push(company.prevYear.receivablesNet);
+                companyArray.push(company.currentYear.receivablesNet);
 
-                companyArray.push(company.prevYear.sTotalCurrentAssets);
-                companyArray.push(company.currentYear.sTotalCurrentAssets);
+                companyArray.push(company.prevYear.totalCurrentAssets);
+                companyArray.push(company.currentYear.totalCurrentAssets);
 
-                companyArray.push(company.prevYear.sPropertyPlantAndEquipmentNet);
-                companyArray.push(company.currentYear.sPropertyPlantAndEquipmentNet);
+                companyArray.push(company.prevYear.propertyPlantAndEquipmentNet);
+                companyArray.push(company.currentYear.propertyPlantAndEquipmentNet);
 
-                companyArray.push(company.prevYear.sTotalAssets);
-                companyArray.push(company.currentYear.sTotalAssets);
+                companyArray.push(company.prevYear.totalAssets);
+                companyArray.push(company.currentYear.totalAssets);
 
-                companyArray.push(company.prevYear.sTotalCurrentLiabilities);
-                companyArray.push(company.currentYear.sTotalCurrentLiabilities);
+                companyArray.push(company.prevYear.totalCurrentLiabilities);
+                companyArray.push(company.currentYear.totalCurrentLiabilities);
 
-                companyArray.push(company.prevYear.sTotalDebt);
-                companyArray.push(company.currentYear.sTotalDebt);
+                companyArray.push(company.prevYear.totalDebt);
+                companyArray.push(company.currentYear.totalDebt);
 
-                companyArray.push(company.prevYear.sDepreciationAmortisation);
-                companyArray.push(company.currentYear.sDepreciationAmortisation);
+                companyArray.push(company.prevYear.depreciationAmortisation);
+                companyArray.push(company.currentYear.depreciationAmortisation);
 
-                companyArray.push(company.prevYear.sOperatingCashFlow);
-                companyArray.push(company.currentYear.sOperatingCashFlow);
+                companyArray.push(company.prevYear.operatingCashFlow);
+                companyArray.push(company.currentYear.depreciationAmortisation);
 
-                companyArray.push(company.prevYear.sGrossMargin);
-                companyArray.push(company.currentYear.sGrossMargin);
+                companyArray.push(company.prevYear.grossMargin);
+                companyArray.push(company.currentYear.grossMargin);
 
-                companyArray.push(company.prevYear.sDebtToAssetRatio);
-                companyArray.push(company.currentYear.sDebtToAssetRatio);
+                companyArray.push(company.prevYear.debtToAssetRatio);
+                companyArray.push(company.currentYear.debtToAssetRatio);
 
-                companyArray.push(company.currentYear.sMarketCap);
+                companyArray.push(company.currentYear.marketCap);
 
-                companyArray.push(company.prevYear.sCurrentRatio);
-                companyArray.push(company.currentYear.sCurrentRatio);
+                companyArray.push(company.prevYear.currentRatio);
+                companyArray.push(company.currentYear.currentRatio);
 
-                companyArray.push(company.prevYear.sReturnOnAssets);
-                companyArray.push(company.currentYear.sReturnOnAssets);
+                companyArray.push(company.prevYear.returnOnAssets);
+                companyArray.push(company.currentYear.returnOnAssets);
 
-                companyArray.push(company.prevYear.sEBIT);
-                companyArray.push(company.currentYear.sEBIT);
+                companyArray.push(company.prevYear.EBIT);
+                companyArray.push(company.currentYear.EBIT);
 
-                companyArray.push(company.prevYear.sCashAndCashEquivalents);
-                companyArray.push(company.currentYear.sCashAndCashEquivalents);
+                companyArray.push(company.prevYear.cashAndCashEquivalents);
+                companyArray.push(company.currentYear.cashAndCashEquivalents);
 
-                companyArray.push(company.prevYear.sCurrentDebt);
-                companyArray.push(company.currentYear.sCurrentDebt);
+                companyArray.push(company.prevYear.currentDebt);
+                companyArray.push(company.currentYear.currentDebt);
 
-                companyArray.push(company.prevYear.sTotalLiabilities);
-                companyArray.push(company.currentYear.sTotalLiabilities);
+                companyArray.push(company.prevYear.totalLiabilities);
+                companyArray.push(company.currentYear.totalLiabilities);
 
-                companyArray.push(company.prevYear.sPreferredEquity);
-                companyArray.push(company.currentYear.sPreferredEquity);
+                companyArray.push(company.prevYear.preferredEquity);
+                companyArray.push(company.currentYear.totalLiabilities);
 
-                companyArray.push(company.prevYear.sNetIncome);
-                companyArray.push(company.currentYear.sNetIncome);
+                companyArray.push(company.prevYear.netIncome);
+                companyArray.push(company.currentYear.netIncome);
 
-                companyArray.push(company.prevYear.sDividendsPaid);
-                companyArray.push(company.currentYear.sDividendsPaid);
+                companyArray.push(company.prevYear.dividendsPaid);
+                companyArray.push(company.currentYear.dividendsPaid);
 
                 catJson.push(companyArray);
             });
@@ -464,29 +464,4 @@ export class CompanyValuesByYear {
     public preferredEquity: number = 0;
     public netIncome: number = 0;
     public dividendsPaid: number = 0;
-
-    public sMarketCap: string = '';
-    public sRevenues: string = '';
-    public sSellingGeneralAndAdministrative: string = '';
-    public sIncomeFromContinuingOperations: string = '';
-    public sReceivablesNet: string = '';
-    public sTotalCurrentAssets: string = '';
-    public sPropertyPlantAndEquipmentNet: string = '';
-    public sTotalAssets: string = '';
-    public sTotalCurrentLiabilities: string = '';
-    public sTotalDebt: string = '';
-    public sDepreciationAmortisation: string = '';
-    public sOperatingCashFlow: string = '';
-    public sGrossMargin: string = '';
-    public sDebtToAssetRatio: string = '';
-    public sCurrentRatio: string = '';
-    public sReturnOnAssets: string = '';
-    public sEBIT: string = '';//new
-    public sCashAndCashEquivalents: string = '';
-    public sCurrentDebt: string = '';
-    public sTotalLiabilities: string = '';
-    public sPreferredEquity: string = '';
-    public sNetIncome: string = '';
-    public sDividendsPaid: string = '';
-
 }
