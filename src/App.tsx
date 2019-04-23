@@ -87,6 +87,9 @@ class App extends React.Component<AppProps, AppState> {
 
                         const categoriesArray: CompanyCategoryParsed[] = [];
 
+                        Object.keys(categoriesContainer).forEach((key: any) => {
+                            categoriesArray.push(categoriesContainer[key]);
+                        });
                         if (categoriesContainer) {
                             const catsArray: any[] = CompanyCategoryParsed.categoriesToJson(categoriesArray);
                             localStorage.setItem('rawData', JSON.stringify(catsArray));
