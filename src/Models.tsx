@@ -315,24 +315,18 @@ export class CompanyCategoryParsed {
         const salesGrowth: number[] = [];
 
         companies.forEach((companyData: CompanyData) => {
-            assets.push(companyData.prevYear.totalAssets);
             assets.push(companyData.currentYear.totalAssets);
 
-            sales.push(companyData.prevYear.revenues);
             sales.push(companyData.currentYear.revenues);
 
             marketCap.push(companyData.currentYear.marketCap);
 
-            wCapToTotalAssel.push((companyData.prevYear.totalCurrentAssets - companyData.prevYear.totalCurrentLiabilities) / companyData.prevYear.totalAssets);
             wCapToTotalAssel.push((companyData.currentYear.totalCurrentAssets - companyData.currentYear.totalCurrentLiabilities) / companyData.currentYear.totalAssets);
 
-            currentRatio.push(companyData.prevYear.currentRatio);
             currentRatio.push(companyData.currentYear.currentRatio);
 
-            totalDebtToTotalAssets.push(companyData.prevYear.debtToAssetRatio);
             totalDebtToTotalAssets.push(companyData.currentYear.debtToAssetRatio);
 
-            returnOnAssets.push(companyData.prevYear.returnOnAssets);
             returnOnAssets.push(companyData.currentYear.returnOnAssets);
 
             salesGrowth.push((companyData.currentYear.revenues - companyData.prevYear.revenues) / companyData.prevYear.revenues);
