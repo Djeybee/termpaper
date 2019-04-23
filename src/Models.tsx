@@ -302,7 +302,7 @@ export class CompanyCategoryParsed {
         let companies: CompanyData[] = [];
 
         categories.forEach((category: CompanyCategoryParsed) => {
-            companies = companies.concat(category.filteredCompanies);
+            companies = companies.concat(category.companies);
         });
 
         const assets: number[] = [];
@@ -341,9 +341,9 @@ export class CompanyCategoryParsed {
         return [
             ['', 'Mean', 'Median'],
             ['Size', '', ''],
-            ['Assets', nFormatter(average(assets)), nFormatter(median(assets))],
-            ['Sales', nFormatter(average(sales)), nFormatter(median(sales))],
-            ['Market Value', nFormatter(average(marketCap)), nFormatter(median(marketCap))],
+            ['Assets', average(assets).toString(), median(assets).toString()],
+            ['Sales', average(sales).toString(), median(sales).toString()],
+            ['Market Value', average(marketCap).toString(), median(marketCap).toString()],
             ['', '', ''],
             ['Leverage/liquidity', '', ''],
             ['Working capital to total assets', (average(wCapToTotalAssel)).toString(), (median(wCapToTotalAssel)).toString()],
