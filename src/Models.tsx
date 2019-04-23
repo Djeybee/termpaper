@@ -437,6 +437,7 @@ export class CompanyData {
     public SOFT_ASSETS: number = 0;
     public CH_CS: number = 0;
     public CH_ROA: number = 0;
+    public CH_INV: number = 0;
 }
 
 export class CompanyValuesByYear {
