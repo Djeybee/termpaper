@@ -239,6 +239,7 @@ export class CompanyCategoryParsed {
         const SOFT_ASSETS: any[] = ['SOFT_ASSETS:'];
         const CH_CS: any[] = ['CH_CS:'];
         const CH_ROA: any[] = ['CH_ROA:'];
+        const REVENUE: any[] = ['REVENUE:'];
 
         categories.forEach((category: CompanyCategoryParsed) => {
             category.companies.forEach((company: CompanyData) => {
@@ -263,10 +264,11 @@ export class CompanyCategoryParsed {
                 SOFT_ASSETS.push(company.SOFT_ASSETS);
                 CH_CS.push(company.CH_CS);
                 CH_ROA.push(company.CH_ROA);
+                REVENUE.push(company.currentYear.revenues);
             });
         });
 
-        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA, ALTMAN_Z_SCORE, GROWTH, RSST_ACC, CH_REC, SOFT_ASSETS, CH_CS, CH_ROA];
+        return [names, DSR, GMI, AQI, SGI, DEPI, SGAI, Accruals, LEVI, TLTA, SATA, LOGTA, CATA, ALTMAN_Z_SCORE, GROWTH, RSST_ACC, CH_REC, SOFT_ASSETS, CH_CS, CH_ROA, [' '], REVENUE];
     }
 
 
