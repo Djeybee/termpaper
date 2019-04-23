@@ -359,25 +359,7 @@ export class CompanyCategoryParsed {
 
         let lastYear: number = 0;
 
-        const filter: Category[] = [
-            Category.BasicMaterials,
-            Category.ConsumerCyclical,
-            Category.ConsumerDefensive,
-            Category.Energy,
-            Category.Healthcare,
-            Category.Industrials,
-            Category.Technology
-        ];
-
-        const filteredCategories: CompanyCategoryParsed[] = [];
         categories.forEach((category: CompanyCategoryParsed) => {
-
-            if (filter.indexOf(category.category) != -1) {
-                filteredCategories.push(category);
-            }
-        });
-
-        filteredCategories.forEach((category: CompanyCategoryParsed) => {
             Object.keys(category.quantile).forEach((value: any) => {
                 if (value < firstYear) {
                     firstYear = value;
@@ -401,7 +383,7 @@ export class CompanyCategoryParsed {
             firstRow.push(i.toString());
         }
 
-        filteredCategories.forEach((category: CompanyCategoryParsed) => {
+        categories.forEach((category: CompanyCategoryParsed) => {
             const categoryRow: string[] = [category.categoryName];
 
             years.forEach((year: number) => {
