@@ -9,6 +9,8 @@ var FileSaver = require('file-saver');
 var resultsData = require('src/results.json');
 var allData = require('src/allData.json');
 
+var XLSX = require('../node_modules/xlsx-style');
+
 interface AppProps {
 }
 
@@ -224,15 +226,6 @@ class App extends React.Component<AppProps, AppState> {
             jsonData,
             {skipHeader: true}
         );
-
-        sheet['A1'].s = {
-            fill: {
-                type: 'pattern',
-                pattern: "solid", // none / solid
-                fgColor: {rgb: "000000"},
-                bgColor: {rgb: "000000"}
-            }
-        };
 
         this.setState({
             sheetMedian: sheet,
