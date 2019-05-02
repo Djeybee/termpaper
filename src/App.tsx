@@ -9,8 +9,6 @@ var FileSaver = require('file-saver');
 var resultsData = require('src/results.json');
 var allData = require('src/allData.json');
 
-var XLSX = require('../node_modules/xlsx-style');
-
 interface AppProps {
 }
 
