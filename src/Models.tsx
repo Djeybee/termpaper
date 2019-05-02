@@ -1,5 +1,5 @@
-import { average, median, nFormatter } from "./Misc";
-import { OverscrollBehaviorProperty } from "csstype";
+import {average, median, nFormatter} from "./Misc";
+import {OverscrollBehaviorProperty} from "csstype";
 
 export enum Indicator {
     NameOfCompany,
@@ -96,6 +96,7 @@ export class CompanyCategoryParsed {
             'Preferred equity', '',
             'Net income', '',
             'Dividends paid', '',
+            'Common Stock', '',
         ]];
 
 
@@ -118,6 +119,7 @@ export class CompanyCategoryParsed {
                 'first year', 'last year',
                 'first year', 'last year',
                 "",
+                'first year', 'last year',
                 'first year', 'last year',
                 'first year', 'last year',
                 'first year', 'last year',
@@ -197,13 +199,16 @@ export class CompanyCategoryParsed {
                 companyArray.push(company.currentYear.totalLiabilities);
 
                 companyArray.push(company.prevYear.preferredEquity);
-                companyArray.push(company.currentYear.totalLiabilities);
+                companyArray.push(company.currentYear.preferredEquity);
 
                 companyArray.push(company.prevYear.netIncome);
                 companyArray.push(company.currentYear.netIncome);
 
                 companyArray.push(company.prevYear.dividendsPaid);
                 companyArray.push(company.currentYear.dividendsPaid);
+
+                companyArray.push(company.prevYear.commonStock);
+                companyArray.push(company.currentYear.commonStock);
 
                 catJson.push(companyArray);
             });
@@ -464,4 +469,5 @@ export class CompanyValuesByYear {
     public preferredEquity: number = 0;
     public netIncome: number = 0;
     public dividendsPaid: number = 0;
+    public commonStock: number = 0;
 }

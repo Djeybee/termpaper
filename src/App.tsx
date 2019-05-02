@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 
 import * as XLSX from 'xlsx';
-import { CompanyCategoryParsed, CompanyData } from "./Models";
+import {CompanyCategoryParsed, CompanyData} from "./Models";
 
 var FileSaver = require('file-saver');
 
@@ -201,6 +201,7 @@ class App extends React.Component<AppProps, AppState> {
         sheet['!merges'].push({s: {r: 0, c: 40}, e: {r: 0, c: 41}});
         sheet['!merges'].push({s: {r: 0, c: 42}, e: {r: 0, c: 43}});
         sheet['!merges'].push({s: {r: 0, c: 44}, e: {r: 0, c: 45}});
+        sheet['!merges'].push({s: {r: 0, c: 46}, e: {r: 0, c: 47}});
 
         this.setState({
             sheetRaw: sheet,
