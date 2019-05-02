@@ -315,7 +315,12 @@ export class CompanyCategoryParsed {
         const totalDebtToTotalAssets: number[] = [];
 
         const returnOnAssets: number[] = [];
-        const salesGrowth: number[] = [];
+
+        const WORKING_CAPITAL_TO_TOTAL_ASSETS: number[] = [];
+        const CURRENT_RATIO: number[] = [];
+        const TOTAL_DEBT_TO_TOTAL_ASSETS: number[] = [];
+        const RETURN_ON_ASSETS: number[] = [];
+        const SALES_GROWTH: number[] = [];
 
         companies.forEach((companyData: CompanyData) => {
             assets.push(companyData.currentYear.totalAssets);
@@ -332,7 +337,11 @@ export class CompanyCategoryParsed {
 
             returnOnAssets.push(companyData.currentYear.returnOnAssets);
 
-            salesGrowth.push((companyData.currentYear.revenues - companyData.prevYear.revenues) / companyData.prevYear.revenues);
+            WORKING_CAPITAL_TO_TOTAL_ASSETS.push(companyData.WORKING_CAPITAL_TO_TOTAL_ASSETS);
+            CURRENT_RATIO.push(companyData.CURRENT_RATIO);
+            TOTAL_DEBT_TO_TOTAL_ASSETS.push(companyData.TOTAL_DEBT_TO_TOTAL_ASSETS);
+            RETURN_ON_ASSETS.push(companyData.RETURN_ON_ASSETS);
+            SALES_GROWTH.push(companyData.SALES_GROWTH);
         });
 
         console.log('sales:', JSON.stringify(sales));
@@ -353,7 +362,12 @@ export class CompanyCategoryParsed {
             ['', '', ''],
             ['Profitability/Growth', '', ''],
             ['Return on assets', (average(returnOnAssets)).toString(), (median(returnOnAssets)).toString()],
-            ['Sales Growth', average(salesGrowth).toString(), median(salesGrowth).toString()],
+            ['', '', ''],
+            ['Working capital to total assets ', (average(WORKING_CAPITAL_TO_TOTAL_ASSETS)).toString(), (median(WORKING_CAPITAL_TO_TOTAL_ASSETS)).toString()],
+            ['Current ratio', (average(CURRENT_RATIO)).toString(), (median(CURRENT_RATIO)).toString()],
+            ['Total debt to total assets', (average(TOTAL_DEBT_TO_TOTAL_ASSETS)).toString(), (median(TOTAL_DEBT_TO_TOTAL_ASSETS)).toString()],
+            ['Return on assets', (average(RETURN_ON_ASSETS)).toString(), (median(RETURN_ON_ASSETS)).toString()],
+            ['Sales Growth ', (average(SALES_GROWTH)).toString(), (median(SALES_GROWTH)).toString()],
         ];
     }
 
@@ -441,6 +455,14 @@ export class CompanyData {
     public CH_CS: number = 0;
     public CH_ROA: number = 0;
     public CH_INV: number = 0;
+    public ISSUE: number = 0;
+
+//indexes
+    public WORKING_CAPITAL_TO_TOTAL_ASSETS: number = 0;
+    public CURRENT_RATIO: number = 0;
+    public TOTAL_DEBT_TO_TOTAL_ASSETS: number = 0;
+    public RETURN_ON_ASSETS: number = 0;
+    public SALES_GROWTH: number = 0;
 }
 
 export class CompanyValuesByYear {
