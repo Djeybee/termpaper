@@ -225,6 +225,15 @@ class App extends React.Component<AppProps, AppState> {
             {skipHeader: true}
         );
 
+        sheet['A1'].s = {
+            fill: {
+                type: 'pattern',
+                pattern: "solid", // none / solid
+                fgColor: {rgb: "000000"},
+                bgColor: {rgb: "000000"}
+            }
+        };
+
         this.setState({
             sheetMedian: sheet,
         });
